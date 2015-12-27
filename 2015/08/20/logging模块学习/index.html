@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python logging,模块学习," />
 
 
 
@@ -53,16 +53,88 @@
 
 
 
-<meta name="description" content="我试一下哈">
+<meta name="description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
+
+各个level的说明(按等级高低排序):
+
+
+levels
+说明  
+
+
+
+
+DEBUG
+用来诊断是否有bug的详细信息
+
+
+INFO
+确认程序按预想的执行
+
+
+WARNING
+提示有不期望的事情发生, 或者可能会引起某些未来的问题
+
+
+ERROR
+提示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我就试试">
-<meta property="og:url" content="http://yoursite.com/2015/12/26/我就试试/index.html">
+<meta property="og:title" content="logging模块学习">
+<meta property="og:url" content="http://yoursite.com/2015/08/20/logging模块学习/index.html">
 <meta property="og:site_name" content="Edward Shen's blog">
-<meta property="og:description" content="我试一下哈">
-<meta property="og:updated_time" content="2015-12-26T07:01:19.000Z">
+<meta property="og:description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
+
+各个level的说明(按等级高低排序):
+
+
+levels
+说明  
+
+
+
+
+DEBUG
+用来诊断是否有bug的详细信息
+
+
+INFO
+确认程序按预想的执行
+
+
+WARNING
+提示有不期望的事情发生, 或者可能会引起某些未来的问题
+
+
+ERROR
+提示">
+<meta property="og:updated_time" content="2015-12-27T06:01:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我就试试">
-<meta name="twitter:description" content="我试一下哈">
+<meta name="twitter:title" content="logging模块学习">
+<meta name="twitter:description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
+
+各个level的说明(按等级高低排序):
+
+
+levels
+说明  
+
+
+
+
+DEBUG
+用来诊断是否有bug的详细信息
+
+
+INFO
+确认程序按预想的执行
+
+
+WARNING
+提示有不期望的事情发生, 或者可能会引起某些未来的问题
+
+
+ERROR
+提示">
 
 
 
@@ -74,7 +146,7 @@
   };
 </script>
 
-  <title> 我就试试 | Edward Shen's blog </title>
+  <title> logging模块学习 | Edward Shen's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -137,6 +209,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -194,7 +286,7 @@
             
             
               
-                我就试试
+                logging模块学习
               
             
           </h1>
@@ -203,19 +295,34 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-26T15:00:44+08:00" content="2015-12-26">
-              2015-12-26
+            <time itemprop="dateCreated" datetime="2015-08-20T13:04:50+08:00" content="2015-08-20">
+              2015-08-20
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python-programming/" itemprop="url" rel="index">
+                    <span itemprop="name">python programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/26/我就试试/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/26/我就试试/" itemprop="commentsCount"></span>
+                <a href="/2015/08/20/logging模块学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/20/logging模块学习/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -234,25 +341,84 @@
       
 
       
-        <span itemprop="articleBody"><p>我试一下哈</p>
+        <span itemprop="articleBody"><blockquote>
+<p>这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: <a href="https://docs.python.org/2.7/howto/logging.html" target="_blank" rel="external">python tutorial</a></p>
+</blockquote>
+<h5 id="u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A"><a href="#u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A" class="headerlink" title="各个level的说明(按等级高低排序):"></a>各个level的说明(按等级高低排序):</h5><table>
+<thead>
+<tr>
+<th>levels</th>
+<th>说明  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DEBUG</td>
+<td>用来诊断是否有bug的详细信息</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>确认程序按预想的执行</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>提示有不期望的事情发生, 或者可能会引起某些未来的问题</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>提示某些更严重的信息, 已经引起某些功能的丧失</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>提示某些更严重的错误, 这些错误会导致程序不能往下执行</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h5 id="u6A21_u5757_u4F7F_u7528_3A"><a href="#u6A21_u5757_u4F7F_u7528_3A" class="headerlink" title="模块使用:"></a>模块使用:</h5><h6 id="u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A"><a href="#u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A" class="headerlink" title="首先需要logging.basicConfig()来配置, 以下是参数说明:"></a>首先需要logging.basicConfig()来配置, 以下是参数说明:</h6><ol>
+<li>filename: 指定log文件存放位置.</li>
+<li>filemode: 与filename搭配使用. 如果赋值为’w’, 执行生成的log会覆盖上次的文件.</li>
+<li>level: 指定log的等级. 比如赋值为logging.DEBUG, 则包括DEBUG以及比DEBUG更重要的等级. 默认的level值是logging.WARNING</li>
+<li><p>format: 需要对<a href="https://docs.python.org/2.7/library/logging.html#logrecord-attributes" target="_blank" rel="external">logRecord attributes</a>引用. 引用方式为: %(attr)s</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.<span class="function"><span class="title">basicConfig</span><span class="params">(format=<span class="string">'%(asctime)s %(message)s'</span>, ...)</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果format里使用了asctime, 那么datefmt参数可以配置时间显示方式:</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.basicConfig(<span class="keyword">format</span>=<span class="string">'%(asctime)s, datefmt='</span><span class="variable">%m</span>/<span class="variable">%d</span>/<span class="variable">%Y</span>  <span class="variable">%H</span>:<span class="variable">%M</span>:<span class="variable">%S</span><span class="string">')</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="u5176_u4ED6_u7528_u6CD5_3A"><a href="#u5176_u4ED6_u7528_u6CD5_3A" class="headerlink" title="其他用法:"></a>其他用法:</h5><p>可以在执行python文件时命令行指定level等级:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--log=INFO</span></span><br></pre></td></tr></table></figure></p>
+<p>在python文件中获取:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">numeric = <span class="function"><span class="title">getattr</span><span class="params">(logging, loglevel.upper()</span></span>, None)</span><br><span class="line"><span class="keyword">if</span> not <span class="function"><span class="title">isinstance</span><span class="params">(numeric, int)</span></span>:</span><br><span class="line">        raise <span class="function"><span class="title">ValueError</span><span class="params">(<span class="string">'Invalid log level %s'</span> % loglevel)</span></span></span><br><span class="line">logging.<span class="function"><span class="title">basicConfig</span><span class="params">(level=numeric, ....)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>还有很多高阶的用法, 一般用不到. 如果你感兴趣, 可参考: <a href="https://docs.python.org/2.7/howto/logging.html#logging-advanced-tutorial" target="_blank" rel="external">advanced usage of logging</a></p>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/python-logging/" rel="tag">#python logging</a>
+          
+            <a href="/tags/模块学习/" rel="tag">#模块学习</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/26/my-new-post/" rel="next" title="my new post">
-                <i class="fa fa-chevron-left"></i> my new post
+              <a href="/2015/07/17/subprocess模块学习/" rel="next" title="subprocess模块学习">
+                <i class="fa fa-chevron-left"></i> subprocess模块学习
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/13/linux控制USB的绑定-解绑/" rel="prev" title="linux控制USB的绑定/解绑">
+                linux控制USB的绑定/解绑 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -279,8 +445,8 @@
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/26/我就试试/"
-           data-title="我就试试" data-url="http://yoursite.com/2015/12/26/我就试试/">
+      <div class="ds-thread" data-thread-key="2015/08/20/logging模块学习/"
+           data-title="logging模块学习" data-url="http://yoursite.com/2015/08/20/logging模块学习/">
       </div>
     
   </div>
@@ -324,21 +490,21 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -355,6 +521,24 @@
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/edward-f0cus" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2164170472" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -377,7 +561,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A"><span class="nav-number">1.</span> <span class="nav-text">各个level的说明(按等级高低排序):</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6A21_u5757_u4F7F_u7528_3A"><span class="nav-number">2.</span> <span class="nav-text">模块使用:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A"><span class="nav-number">2.1.</span> <span class="nav-text">首先需要logging.basicConfig()来配置, 以下是参数说明:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5176_u4ED6_u7528_u6CD5_3A"><span class="nav-number">3.</span> <span class="nav-text">其他用法:</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -397,7 +581,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2013 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>

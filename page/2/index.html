@@ -56,7 +56,7 @@
 <meta name="description" content="Somewhere I belong...">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Edward Shen's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Edward Shen's blog">
 <meta property="og:description" content="Somewhere I belong...">
 <meta name="twitter:card" content="summary">
@@ -201,10 +201,6 @@
     
       
       
-        
-        
-        
-      
 
       
     
@@ -231,8 +227,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/python的装饰器-decorator/" itemprop="url">
-                  python的装饰器: decorator
+                <a class="post-title-link" href="/2015/03/17/python文档学习-逻辑控制相关/" itemprop="url">
+                  python文档学习: 逻辑控制相关
                 </a>
               
             
@@ -242,8 +238,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T13:09:39+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2015-03-17T13:02:44+08:00" content="2015-03-17">
+              2015-03-17
             </time>
           </span>
 
@@ -268,8 +264,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/python的装饰器-decorator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/python的装饰器-decorator/" itemprop="commentsCount"></span>
+                <a href="/2015/03/17/python文档学习-逻辑控制相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/17/python文档学习-逻辑控制相关/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -289,11 +285,15 @@
 
       
         
-          <p><strong> 本质上来说, 就是闭包加python的一个语法糖.</strong><br>亲们,让我们从头说起:</p>
-<h5 id="python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61"><a href="#python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61" class="headerlink" title="python中一切皆对象,方法也是一个对象."></a>python中一切皆对象,方法也是一个对象.</h5>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">isinstance(foo, object)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<p>所以TA可以被作为方法的形参传进去, 也可以作为return value被return.<br>我们先记下这一点, 后面会详细说明.</p>
+          <blockquote>
+<p>refers to <a href="https://docs.python.org/2.7/tutorial/datastructures.html#looping-techniques">python tutorial</a></p>
+</blockquote>
+<h3 id="u4F7F_u7528_u5FAA_u73AF_u7684_u4E00_u4E9B_u6280_u5DE7"><a href="#u4F7F_u7528_u5FAA_u73AF_u7684_u4E00_u4E9B_u6280_u5DE7" class="headerlink" title="使用循环的一些技巧"></a>使用循环的一些技巧</h3><ul>
+<li>当我们要循环一个序列(可迭代)的时候, 如果需要同时检索索引和对应的值, 我们可以用内置函数enumerate():<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="tag">i</span>, item <span class="keyword">in</span> <span class="function"><span class="title">enumerate</span><span class="params">(iterable)</span></span>:</span><br><span class="line">     blablabla...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/23/python的装饰器-decorator/#more" rel="contents">
+            <a class="btn" href="/2015/03/17/python文档学习-逻辑控制相关/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -336,8 +336,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/11/03/linux中的uniq/" itemprop="url">
-                  linux中的uniq
+                <a class="post-title-link" href="/2015/03/15/python-list的一些技巧/" itemprop="url">
+                  python list的一些技巧
                 </a>
               
             
@@ -347,8 +347,114 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-03T13:18:45+08:00" content="2015-11-03">
-              2015-11-03
+            <time itemprop="dateCreated" datetime="2015-03-15T12:55:20+08:00" content="2015-03-15">
+              2015-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python-programming/" itemprop="url" rel="index">
+                    <span itemprop="name">python programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/15/python-list的一些技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/15/python-list的一些技巧/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>觉得很有用, 摘抄自: <a href="http://enml.github.io/site/2014/04/25/python-code/">http://enml.github.io/site/2014/04/25/python-code/</a></p>
+</blockquote>
+<h4 id="u5217_u8868_u76F8_u90BB_u5143_u7D20_u538B_u7F29_u5668"><a href="#u5217_u8868_u76F8_u90BB_u5143_u7D20_u538B_u7F29_u5668" class="headerlink" title="列表相邻元素压缩器"></a>列表相邻元素压缩器</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(*([iter(a)] * <span class="number">2</span>))</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent = lambda a, <span class="symbol">k:</span> zip(*([iter(a)] * k))</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">3</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">2</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">1</span>)</span><br><span class="line">[(<span class="number">1</span>,), (<span class="number">2</span>,), (<span class="number">3</span>,), (<span class="number">4</span>,), (<span class="number">5</span>,), (<span class="number">6</span>,)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(a[<span class="symbol">:</span><span class="symbol">:</span><span class="number">2</span>], a[<span class="number">1</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">2</span>])</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(a[<span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>], a[<span class="number">1</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>], a[<span class="number">2</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>])</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent = lambda a, <span class="symbol">k:</span> zip(*(a[<span class="symbol">i:</span><span class="symbol">:k</span>] for i in range(k)))</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">3</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">2</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">1</span>)</span><br><span class="line">[(<span class="number">1</span>,), (<span class="number">2</span>,), (<span class="number">3</span>,), (<span class="number">4</span>,), (<span class="number">5</span>,), (<span class="number">6</span>,)]</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/15/python-list的一些技巧/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/02/27/bc-command-in-shell/" itemprop="url">
+                  bc command in shell
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-02-27T12:46:13+08:00" content="2015-02-27">
+              2015-02-27
             </time>
           </span>
 
@@ -373,8 +479,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/03/linux中的uniq/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/linux中的uniq/" itemprop="commentsCount"></span>
+                <a href="/2015/02/27/bc-command-in-shell/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/27/bc-command-in-shell/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -395,359 +501,13 @@
       
         
           <blockquote>
-<p>昨天有个同事谈到一个笔试题:<br>  <em>用shell在一个文件中找出出现次数top50的50个单词, 前提是在这个文件中每行只有一个单词.</em><br>我们几个讨论了一下, 第一感觉都是用最熟悉的grep, 但要实现起来怕是得很多代码. 晚上回家没事瞎逛, 看到网友在某篇技术博客里提到uniq命令, 以前竟然不知道这个command, 请原谅我的无知…我搜了下用法, 让我立刻意识到这个笔试题可以秒答…</p>
+<p>  昨天在工作中遇到这么一个问题, 在shell中比较浮点数和整数的大小. 原本以为用shell的比较符号(-lt之类的)就可以, 没想到一试不行.<br> 问了度娘后才发现, shell原则上是不支持浮点数计算的.<br>  因为着急用, 就随便找了个帖子说可以这么比:<br>  <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  expr <span class="variable">$a</span> \&gt; <span class="variable">$b</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
+<p>  我没test就直接先push到公司的repo了, reviewer估计也没用过, 看了下就merge了.<br> 今天跑脚本才发现根本就不能这么用啊, holy shit. 最后找到了bc这个神器, 问了下度娘, 都没什么好文章. 索性就直接上官网看<a href="https://www.gnu.org/software/bc/manual/html_mono/bc.html#SEC3">manual</a>.<br>  好了, 废话说了一大堆, 现在来说说bc吧:)</p>
 </blockquote>
-<h3 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h3><p>顾名思义, 这个command就是要列出不重复的项(使唯一). 以前一直感觉shell没有set这个数据类型很不方便, 现在完全可以用此命令来弥补了. 需要注意的是: <strong>uniq只比较相邻两项, 也就是说隔行的重复, TA是不care的. 这个时候就需要配合sort命令.</strong><br>参数如下:<br> <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">u</span>:  列出若干唯一项. 应该<span class="keyword">u</span>是取得uniq的意思.</span><br><span class="line">-<span class="keyword">d</span>:  列出若干重复项. 应该<span class="keyword">d</span>是取得disable uniq的意思.</span><br><span class="line">-f <span class="keyword">n</span>: 忽略前<span class="keyword">n</span>个字段再来做比较. f <span class="keyword">means</span> fields. 字段间的分隔符是空格或者<span class="keyword">TAB</span>. 从0开始计数. 与-<span class="keyword">n</span>等价.</span><br><span class="line">-s <span class="keyword">n</span>:  忽略前<span class="keyword">n</span>个字符. s <span class="keyword">means</span> characters. 从0开始计数. 与+<span class="keyword">n</span>等价.</span><br><span class="line">-i: 忽略大小写. i <span class="keyword">means</span> ignore case.</span><br><span class="line">-c: 计数. c <span class="keyword">means</span> <span class="keyword">count</span>.</span><br></pre></td></tr></table></figure></p>
+<p>首先, bc可以是交互性的, 也支持在管道符后面使用.<br>所以一些复杂的有关浮点数的运算, 完全可以结合expect脚本, 个人感觉会很方便. 如果用awk算, 估计会吐…<br>像我昨天遇到的普通运算完全就可以用管道啦.<br>一般来说在脚本中可以这么用:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=$(bc &#60;&#60; EOF&#10;  28.3 * 55.8&#10;  EOF)</span><br></pre></td></tr></table></figure></p>
+<p>bc可以说totally就是一门语言. 有变量, 有逻辑控制, 亦有函数.<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/03/linux中的uniq/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/13/linux控制USB的绑定-解绑/" itemprop="url">
-                  linux控制USB的绑定/解绑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-10-13T13:16:31+08:00" content="2015-10-13">
-              2015-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">shell programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/13/linux控制USB的绑定-解绑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/linux控制USB的绑定-解绑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>今天工作中遇到一个问题， 要用代码实现USB的enable和disable. 谷歌了一番, 最终找到理想答案, 我在这里做一个简短porting. 来源：<a href="https://www.linux.com/community/blogs/133-general-linux/727195-disable-a-enable-usb-from-terminal">墙外某博</a></p>
-</blockquote>
-<h4 id="u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A"><a href="#u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A" class="headerlink" title="首先通过lsusb -t来查看USB端口信息："></a>首先通过lsusb -t来查看USB端口信息：</h4>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/linux控制USB的绑定-解绑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/20/logging模块学习/" itemprop="url">
-                  logging模块学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-08-20T13:04:50+08:00" content="2015-08-20">
-              2015-08-20
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/08/20/logging模块学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/20/logging模块学习/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: <a href="https://docs.python.org/2.7/howto/logging.html">python tutorial</a></p>
-</blockquote>
-<h5 id="u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A"><a href="#u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A" class="headerlink" title="各个level的说明(按等级高低排序):"></a>各个level的说明(按等级高低排序):</h5><table>
-<thead>
-<tr>
-<th>levels</th>
-<th>说明  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEBUG</td>
-<td>用来诊断是否有bug的详细信息</td>
-</tr>
-<tr>
-<td>INFO</td>
-<td>确认程序按预想的执行</td>
-</tr>
-<tr>
-<td>WARNING</td>
-<td>提示有不期望的事情发生, 或者可能会引起某些未来的问题</td>
-</tr>
-<tr>
-<td>ERROR</td>
-<td>提示某些更严重的信息, 已经引起某些功能的丧失</td>
-</tr>
-<tr>
-<td>CRITICAL</td>
-<td>提示某些更严重的错误, 这些错误会导致程序不能往下执行</td>
-</tr>
-</tbody>
-</table>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/20/logging模块学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/17/subprocess模块学习/" itemprop="url">
-                  subprocess模块学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-07-17T13:07:15+08:00" content="2015-07-17">
-              2015-07-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/07/17/subprocess模块学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/17/subprocess模块学习/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>subprocess也是一个常用的模块，目前工作所涉及的都比较浅，所以这里只列出一些基本用法和注意点（只适用*nix系统）。以后用到advanced的内容，会更新此文章。refer to: <a href="https://docs.python.org/2/library/subprocess.html?highlight=subprocess#module-subprocess">python DOC</a></p>
-</blockquote>
-<h5 id="u5B9A_u4E49_uFF1A"><a href="#u5B9A_u4E49_uFF1A" class="headerlink" title="定义："></a>定义：</h5><p>spawn新的进程，连接input/output/error管道，并获取错误码。<br>以下模块不建议继续使用，而用subprocess取代：<br><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">os.system</span><br><span class="line">os.spawn<span class="keyword">*</span></span><br><span class="line">os.popen<span class="keyword">*</span></span><br><span class="line">popen2.<span class="keyword">*</span></span><br><span class="line">commands.<span class="keyword">*</span></span><br></pre></td></tr></table></figure></p>
-<p>subprocess确实是更加强大，而且以前的模块有时候会有bug。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/07/17/subprocess模块学习/#more" rel="contents">
+            <a class="btn" href="/2015/02/27/bc-command-in-shell/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -774,7 +534,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 

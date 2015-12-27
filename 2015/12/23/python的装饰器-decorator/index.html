@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="装饰器," />
 
 
 
@@ -53,30 +53,21 @@
 
 
 
-<meta name="description" content="本质上来说, 就是闭包加python的一个语法糖. 亲们,让我们从头说起:
-
-python中一切皆对象,方法也是一个对象.12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
-
-
+<meta name="description" content="本质上来说, 就是闭包加python的一个语法糖.亲们,让我们从头说起:
+python中一切皆对象,方法也是一个对象.  12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
 所以TA可以被作为方法的形参传进去, 也可以作为return value被return.我们先记下这一点, 后面会详细说明.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="my new post">
-<meta property="og:url" content="http://yoursite.com/2015/12/26/my-new-post/index.html">
+<meta property="og:title" content="python的装饰器: decorator">
+<meta property="og:url" content="http://yoursite.com/2015/12/23/python的装饰器-decorator/index.html">
 <meta property="og:site_name" content="Edward Shen's blog">
-<meta property="og:description" content="本质上来说, 就是闭包加python的一个语法糖. 亲们,让我们从头说起:
-
-python中一切皆对象,方法也是一个对象.12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
-
-
+<meta property="og:description" content="本质上来说, 就是闭包加python的一个语法糖.亲们,让我们从头说起:
+python中一切皆对象,方法也是一个对象.  12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
 所以TA可以被作为方法的形参传进去, 也可以作为return value被return.我们先记下这一点, 后面会详细说明.">
-<meta property="og:updated_time" content="2015-12-26T06:57:42.000Z">
+<meta property="og:updated_time" content="2015-12-27T05:58:16.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="my new post">
-<meta name="twitter:description" content="本质上来说, 就是闭包加python的一个语法糖. 亲们,让我们从头说起:
-
-python中一切皆对象,方法也是一个对象.12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
-
-
+<meta name="twitter:title" content="python的装饰器: decorator">
+<meta name="twitter:description" content="本质上来说, 就是闭包加python的一个语法糖.亲们,让我们从头说起:
+python中一切皆对象,方法也是一个对象.  12345def foo():      print &apos;this is func foo&apos;isinstance(foo, object)True
 所以TA可以被作为方法的形参传进去, 也可以作为return value被return.我们先记下这一点, 后面会详细说明.">
 
 
@@ -89,7 +80,7 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
   };
 </script>
 
-  <title> my new post | Edward Shen's blog </title>
+  <title> python的装饰器: decorator | Edward Shen's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -152,6 +143,26 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -209,7 +220,7 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
             
             
               
-                my new post
+                python的装饰器: decorator
               
             
           </h1>
@@ -218,19 +229,34 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-26T14:55:34+08:00" content="2015-12-26">
-              2015-12-26
+            <time itemprop="dateCreated" datetime="2015-12-23T13:09:39+08:00" content="2015-12-23">
+              2015-12-23
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python-programming/" itemprop="url" rel="index">
+                    <span itemprop="name">python programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/26/my-new-post/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/26/my-new-post/" itemprop="commentsCount"></span>
+                <a href="/2015/12/23/python的装饰器-decorator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/python的装饰器-decorator/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -249,35 +275,26 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
       
 
       
-        <span itemprop="articleBody"><p><strong><em> 本质上来说, 就是闭包加python的一个语法糖. </em></strong><br>亲们,让我们从头说起:</p>
-<ul>
-<li>python中一切皆对象,方法也是一个对象.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">isinstance(foo, object)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+        <span itemprop="articleBody"><p><strong> 本质上来说, 就是闭包加python的一个语法糖.</strong><br>亲们,让我们从头说起:</p>
+<h5 id="python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61"><a href="#python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61" class="headerlink" title="python中一切皆对象,方法也是一个对象."></a>python中一切皆对象,方法也是一个对象.</h5>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">isinstance(foo, object)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
 <p>所以TA可以被作为方法的形参传进去, 也可以作为return value被return.<br>我们先记下这一点, 后面会详细说明.</p>
-<ul>
-<li>内嵌方法(nested function):<br>python允许在方法内部定义一个方法, 内部方法可以引用操作外部方法的变量.<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    para = <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'this is outer func'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'this is inner func'</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'outer para in inner is %s'</span> % para</span><br><span class="line">        <span class="keyword">return</span> para</span><br><span class="line">    <span class="keyword">return</span> inner()</span><br><span class="line"></span><br><span class="line"> <span class="keyword">print</span> outer()</span><br><span class="line"> <span class="keyword">print</span> para</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出如下:<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> <span class="keyword">is</span> <span class="keyword">outer</span> func</span><br><span class="line"><span class="keyword">this</span> <span class="keyword">is</span> inner func</span><br><span class="line"><span class="keyword">outer</span> para <span class="keyword">in</span> inner <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">NameError: name <span class="string">'para'</span> <span class="keyword">is</span> not defined</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h5 id="u5185_u5D4C_u65B9_u6CD5_28nested_function_29_3A"><a href="#u5185_u5D4C_u65B9_u6CD5_28nested_function_29_3A" class="headerlink" title="内嵌方法(nested function):"></a>内嵌方法(nested function):</h5><p>python允许在方法内部定义一个方法, 内部方法可以引用操作外部方法的变量.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></span><br><span class="line">    para = <span class="number">1</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">'this is outer func'</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'this is inner func'</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'outer para in inner is %s'</span> % para</span><br><span class="line">        <span class="keyword">return</span> para</span><br><span class="line">    <span class="keyword">return</span> inner()</span><br><span class="line"></span><br><span class="line"> <span class="keyword">print</span> outer()</span><br><span class="line"> <span class="keyword">print</span> para</span><br></pre></td></tr></table></figure></p>
+<p>输出如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">this <span class="keyword">is</span> outer func</span><br><span class="line">this <span class="keyword">is</span> inner func</span><br><span class="line">outer para <span class="keyword">in</span> inner <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line">NameError: name <span class="string">'para'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br></pre></td></tr></table></figure>
 <p>一个方法内部变量的生命周期, 应该是在执行这个方法时被define, 方法执行完毕后被delete. 在这个例子里print outer()之后, para必定不能再被使用, 如果再加一个print para, 必定会报错. okay, 目前为止, 一切都是按我们预想的来, 看起来也很好理解.</p>
-<ul>
-<li>闭包（closures)<br>我们把上面的例子稍微改一改：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span> </span><br><span class="line">      para = <span class="number">1</span> </span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is outer func'</span> </span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span> </span><br><span class="line">              <span class="keyword">print</span> <span class="string">'this is inner func'</span> </span><br><span class="line">              <span class="keyword">print</span> <span class="string">'outer para in inner is %s'</span> % para</span><br><span class="line">              <span class="keyword">return</span> para</span><br><span class="line">      <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line">closure = outer()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出如下：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> <span class="keyword">is</span> <span class="keyword">outer</span> func</span><br></pre></td></tr></table></figure></p>
-<p>这次我们把outer()的返回值改成inner这个方法本身。是不是看起来有点怪怪的？前面已经提到，方法在python里本身也是一个对象，so， why not？<br>从输出可以看出，调用outer()之后，inner方法并没有被执行。这也是好理解的。在python中，“()”是调用操作符，既然outer返回的是inner而不是inner()，说明inner就没有被call，所以它没有执行。cool，到这里虽然看起来有些复杂，但还是在比较好理解的范围之内。<br>我们继续：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print <span class="function"><span class="title">closure</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure></p>
-<p>输出：<br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span> <span class="keyword">is</span> inner func</span><br><span class="line"><span class="keyword">outer</span> para <span class="keyword">in</span> inner <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></p>
-<p>这个是不是就有点难理解了？outer方法已经被执行完了，那么para的生命周期已经结束，inner怎么还可以用它？不报错？<br><strong> 这就是python对闭包的支持。</strong><br>如果我们dir一个方法(dir(closure))，会看到有func_closure这么一个内置的属性。如果此方法是一个闭包，那就会把闭包里用到的对象塞到这个属性里。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span> closure.func_closure</span><br></pre></td></tr></table></figure></p>
+<h5 id="u95ED_u5305_uFF08closures_29"><a href="#u95ED_u5305_uFF08closures_29" class="headerlink" title="闭包（closures)"></a>闭包（closures)</h5><p>我们把上面的例子稍微改一改：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span> </span><br><span class="line">      para = <span class="number">1</span> </span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is outer func'</span> </span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span> </span><br><span class="line">              <span class="keyword">print</span> <span class="string">'this is inner func'</span> </span><br><span class="line">              <span class="keyword">print</span> <span class="string">'outer para in inner is %s'</span> % para</span><br><span class="line">              <span class="keyword">return</span> para</span><br><span class="line">      <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line">closure = outer()</span><br></pre></td></tr></table></figure></p>
+<p>输出如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this <span class="keyword">is</span> outer func</span><br></pre></td></tr></table></figure>
+<p>这次我们把outer()的返回值改成inner这个方法本身。是不是看起来有点怪怪的？前面已经提到，方法在python里本身也是一个对象，so， why not？<br>从输出可以看出，调用outer()之后，inner方法并没有被执行。这也是好理解的。在python中，“()”是调用操作符，既然outer返回的是inner而不是inner()，说明inner就没有被call，所以它没有执行。cool，到这里虽然看起来有些复杂，但还是在比较好理解的范围之内。<br>我们继续：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> closure()</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this <span class="keyword">is</span> inner func</span><br><span class="line">outer para <span class="keyword">in</span> inner <span class="keyword">is</span> <span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>这个是不是就有点难理解了？outer方法已经被执行完了，那么para的生命周期已经结束，inner怎么还可以用它？不报错？<br><strong> 这就是python对闭包的支持。</strong><br>如果我们dir一个方法(dir(closure))，会看到有func_closure这么一个内置的属性。如果此方法是一个闭包，那就会把闭包里用到的对象塞到这个属性里。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">print</span> closure.func_closure</span><br></pre></td></tr></table></figure></p>
 <p>输出：<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(&lt;cell <span class="preprocessor">at</span> <span class="number">0x7f42d46dd280</span>: <span class="keyword">int</span> object <span class="preprocessor">at</span> <span class="number">0x16cd158</span>&gt;,)</span><br></pre></td></tr></table></figure></p>
 <p>这个int对象就是我们例子里可爱的para.</p>
-<ul>
-<li>装饰器（decorator）:<br>升级一下上个例子， 给outer改个名字，同时传个参数。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decor</span><span class="params">(func)</span>:</span></span><br><span class="line">       <span class="keyword">print</span> <span class="string">'this is func decor'</span></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'this is inner func'</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'call func in inner.'</span></span><br><span class="line">                 func()</span><br><span class="line">       <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">foo = decor(foo)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>输出：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this is <span class="function"><span class="keyword">func</span> <span class="title">decor</span></span></span><br><span class="line">this is inner <span class="function"><span class="keyword">func</span></span></span><br><span class="line"><span class="built_in">call</span> <span class="function"><span class="keyword">func</span> <span class="title">in</span> <span class="title">inner</span>.</span></span><br><span class="line">this is <span class="function"><span class="keyword">func</span> <span class="title">foo</span></span></span><br></pre></td></tr></table></figure></p>
+<h5 id="u88C5_u9970_u5668_uFF08decorator_uFF09_3A"><a href="#u88C5_u9970_u5668_uFF08decorator_uFF09_3A" class="headerlink" title="装饰器（decorator）:"></a>装饰器（decorator）:</h5><p>升级一下上个例子， 给outer改个名字，同时传个参数。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decor</span><span class="params">(func)</span>:</span></span><br><span class="line">       <span class="keyword">print</span> <span class="string">'this is func decor'</span></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'this is inner func'</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'call func in inner.'</span></span><br><span class="line">                 func()</span><br><span class="line">       <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">foo = decor(foo)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
+<p>输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this <span class="keyword">is</span> func decor</span><br><span class="line">this <span class="keyword">is</span> inner func</span><br><span class="line">call func <span class="keyword">in</span> inner.</span><br><span class="line">this <span class="keyword">is</span> func foo</span><br></pre></td></tr></table></figure></p>
 <p>改名之后的方法叫decor，加了个参数func。把decor(foo)重新赋值给foo, 并执行foo。<br>结果是原有的foo被执行，还有我们的inner。是不是很酷，相当于给foo加了个包装(wrapper)。<br>我们离胜利仅剩一步！<br>@这个符号是python对闭包采用的一个语法糖（syntax suger）。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decor</span><span class="params">(func)</span>:</span></span><br><span class="line">       <span class="keyword">print</span> <span class="string">'this is func decor'</span></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'this is inner func'</span></span><br><span class="line">                 <span class="keyword">print</span> <span class="string">'call func in inner.'</span></span><br><span class="line">                 func()</span><br><span class="line">       <span class="keyword">return</span> inner</span><br><span class="line"><span class="decorator">@decor</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">         <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># foo = decor(foo)</span></span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></p>
-<p>一样的输出：<br><figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this is <span class="function"><span class="keyword">func</span> <span class="title">decor</span></span></span><br><span class="line">this is inner <span class="function"><span class="keyword">func</span></span></span><br><span class="line"><span class="built_in">call</span> <span class="function"><span class="keyword">func</span> <span class="title">in</span> <span class="title">inner</span>.</span></span><br><span class="line">this is <span class="function"><span class="keyword">func</span> <span class="title">foo</span></span></span><br></pre></td></tr></table></figure></p>
+<p>一样的输出：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">this <span class="keyword">is</span> func decor</span><br><span class="line">this <span class="keyword">is</span> inner func</span><br><span class="line">call func <span class="keyword">in</span> inner.</span><br><span class="line">this <span class="keyword">is</span> func foo</span><br></pre></td></tr></table></figure></p>
 <p>用了@语法糖，就相当于去掉了foo = decor(foo)这一步，让代码看起来更优雅，更readable。<br>That’s it。这就是装饰器。<br>如需转载， 请注明出处！谢谢</p>
 <blockquote>
 <p>还可以用class来做装饰器，请参考：<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=240808" target="_blank" rel="external">class decorator</a><br>也可以给装饰器传参数，请参考：<a href="http://www.artima.com/weblogs/viewpost.jsp?thread=240845" target="_blank" rel="external">decorator with arguments</a></p>
@@ -288,22 +305,24 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/装饰器/" rel="tag">#装饰器</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/26/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2015/11/03/linux中的uniq/" rel="next" title="linux中的uniq">
+                <i class="fa fa-chevron-left"></i> linux中的uniq
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/26/我就试试/" rel="prev" title="我就试试">
-                我就试试 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -330,8 +349,8 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/26/my-new-post/"
-           data-title="my new post" data-url="http://yoursite.com/2015/12/26/my-new-post/">
+      <div class="ds-thread" data-thread-key="2015/12/23/python的装饰器-decorator/"
+           data-title="python的装饰器: decorator" data-url="http://yoursite.com/2015/12/23/python的装饰器-decorator/">
       </div>
     
   </div>
@@ -375,21 +394,21 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
-            
-              <span class="site-state-item-count">0</span>
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
@@ -406,6 +425,24 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
         
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/edward-f0cus" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2164170472" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
           
         </div>
 
@@ -428,7 +465,7 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61"><span class="nav-number">1.</span> <span class="nav-text">python中一切皆对象,方法也是一个对象.</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5185_u5D4C_u65B9_u6CD5_28nested_function_29_3A"><span class="nav-number">2.</span> <span class="nav-text">内嵌方法(nested function):</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u95ED_u5305_uFF08closures_29"><span class="nav-number">3.</span> <span class="nav-text">闭包（closures)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u88C5_u9970_u5668_uFF08decorator_uFF09_3A"><span class="nav-number">4.</span> <span class="nav-text">装饰器（decorator）:</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -448,7 +485,7 @@ python中一切皆对象,方法也是一个对象.12345def foo():      print &ap
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2013 - 
   <span itemprop="copyrightYear">2015</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
