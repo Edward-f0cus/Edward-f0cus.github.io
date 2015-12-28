@@ -366,7 +366,7 @@
     <link href="http://yoursite.com/2015/02/27/bc-command-in-shell/"/>
     <id>http://yoursite.com/2015/02/27/bc-command-in-shell/</id>
     <published>2015-02-27T04:46:13.000Z</published>
-    <updated>2015-12-27T05:53:43.000Z</updated>
+    <updated>2015-12-27T15:55:22.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>  昨天在工作中遇到这么一个问题, 在shell中比较浮点数和整数的大小. 原本以为用shell的比较符号(-lt之类的)就可以, 没想到一试不行.<br> 问了度娘后才发现, shell原则上是不支持浮点数计算的.<br>  因为着急用, 就随便找了个帖子说可以这么比:<br>  <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  expr <span class="variable">$a</span> \&gt; <span class="variable">$b</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
 <p>  我没test就直接先push到公司的repo了, reviewer估计也没用过, 看了下就merge了.<br> 今天跑脚本才发现根本就不能这么用啊, holy shit. 最后找到了bc这个神器, 问了下度娘, 都没什么好文章. 索性就直接上官网看<a href="https://www.gnu.org/software/bc/manual/html_mono/bc.html#SEC3" target="_blank" rel="external">manual</a>.<br>  好了, 废话说了一大堆, 现在来说说bc吧:)</p>
