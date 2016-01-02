@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Somewhere I belong...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2015-12-27T05:58:16.000Z</updated>
+  <updated>2016-01-02T06:44:25.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[我的vim配置]]></title>
+    <link href="http://yoursite.com/2016/01/02/%E6%88%91%E7%9A%84vim%E9%85%8D%E7%BD%AE/"/>
+    <id>http://yoursite.com/2016/01/02/我的vim配置/</id>
+    <published>2016-01-02T06:25:54.000Z</published>
+    <updated>2016-01-02T06:44:25.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>主要是适配python开发. 都是些github star超高之作.</p>
+</blockquote>
+<h3 id="u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A"><a href="#u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A" class="headerlink" title="首先,用vundle来管理插件:"></a>首先,用vundle来管理插件:</h3><p><strong> github stars: 10,272 </strong><br> 地址: <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="external">github/vundle</a></p>
+<h3 id="u6211_u7684vundle_list_3A"><a href="#u6211_u7684vundle_list_3A" class="headerlink" title="我的vundle list:"></a>我的vundle list:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">" The following are examples of different formats supported.</span><br><span class="line"> " Keep Plugin commands between vundle#<span class="operator"><span class="keyword">begin</span>/<span class="keyword">end</span>.</span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'tmhedberg/SimpylFold'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/syntastic'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'nvie/vim-flake8'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'altercation/vim-colors-solarized'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'jistr/vim-nerdtree-tabs'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Lokaltog/powerline'</span>, &#123;<span class="string">'rtp'</span>: <span class="string">'powerline/bindings/vim/'</span>&#125;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h4 id="u6700_u96BE_u6298_u817E_u7684_3AYouCompleteMe"><a href="#u6700_u96BE_u6298_u817E_u7684_3AYouCompleteMe" class="headerlink" title="最难折腾的:YouCompleteMe"></a>最难折腾的:<a href="https://github.com/Valloric/YouCompleteMe" target="_blank" rel="external">YouCompleteMe</a></h4><p><strong> github stars: 9,475 </strong><br>需要编译后才能用, 还有几个依赖要装. 在mac上还必须得装macvim, 如果自己编译过python的话, 更是无数多坑. 当初我为TA折腾了整两天… 不过很值得,最好的自动补全,几乎支持所有语言.<br>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-02%20%E4%B8%8B%E5%8D%881.28.59.png" alt=""></p>
+<h4 id="u7092_u9E21_u7B80_u5355_u7684_u6298_u53E0_3A_SimplyFold"><a href="#u7092_u9E21_u7B80_u5355_u7684_u6298_u53E0_3A_SimplyFold" class="headerlink" title="炒鸡简单的折叠: SimplyFold"></a>炒鸡简单的折叠: <a href="https://github.com/tmhedberg/SimpylFold" target="_blank" rel="external">SimplyFold</a></h4><p><strong> github stars: 102 </strong><br>可以在vimrc里把空格热键成ZA:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">" Enable folding with the spacebar</span><br><span class="line"></span> <span class="keyword">nnoremap</span> &lt;space&gt; za</span><br></pre></td></tr></table></figure></p>
+<p>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-02%20%E4%B8%8B%E5%8D%881.37.07.png" alt=""></p>
+<h4 id="u9759_u6001_u8BED_u6CD5_u68C0_u67E5_3A_syntastic"><a href="#u9759_u6001_u8BED_u6CD5_u68C0_u67E5_3A_syntastic" class="headerlink" title="静态语法检查: syntastic"></a>静态语法检查: <a href="https://github.com/scrooloose/syntastic" target="_blank" rel="external">syntastic</a></h4><p><strong> github star: 5,951</strong><br>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-02%20%E4%B8%8B%E5%8D%881.45.02.png" alt=""></p>
+<h4 id="pep8_u68C0_u67E5_3A_vim-flake8"><a href="#pep8_u68C0_u67E5_3A_vim-flake8" class="headerlink" title="pep8检查: vim-flake8"></a>pep8检查: <a href="https://github.com/nvie/vim-flake8" target="_blank" rel="external">vim-flake8</a></h4><p><strong> github stars: 418</strong><br>我是个重度pep8强迫症患者, 这绝逼是治疗我的神器…<br>得先装flake8第三方库:<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> flake8</span><br></pre></td></tr></table></figure></p>
+<p>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-02%20%E4%B8%8B%E5%8D%881.53.52.png" alt=""></p>
+<h4 id="u6811_u72B6_u5BFC_u822A_3A_nerdtree"><a href="#u6811_u72B6_u5BFC_u822A_3A_nerdtree" class="headerlink" title="树状导航: nerdtree"></a>树状导航: <a href="https://github.com/scrooloose/nerdtree" target="_blank" rel="external">nerdtree</a></h4><p><strong> github stars: 5,667</strong></p>
+<blockquote>
+<p>多tab的nerdtree支持: <a href="https://github.com/jistr/vim-nerdtree-tabs" target="_blank" rel="external">vim-nerdtree-tabs</a></p>
+</blockquote>
+<p>有了TA, vim瞬间提高不止一个bigger…<br>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-01-02%20%E4%B8%8B%E5%8D%881.57.11.png" alt=""></p>
+<h4 id="u9707_u64BC_u7684powerline_3A_powerline"><a href="#u9707_u64BC_u7684powerline_3A_powerline" class="headerlink" title="震撼的powerline: powerline"></a>震撼的powerline: <a href="https://github.com/Lokaltog/vim-powerline" target="_blank" rel="external">powerline</a></h4><p><strong> github stars: 2,640</strong><br>效果:<br><img src="http://7xppkp.com1.z0.glb.clouddn.com/screenshot.png" alt=""></p>
+<p>最后再贴上我的<a href="https://github.com/Edward-f0cus/study" target="_blank" rel="external">.vimrc</a>, 欢迎试用.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>主要是适配python开发. 都是些github star超高之作.</p>
+</blockquote>
+<h3 id="u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A"><a href="#u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A" class="headerlink" title="首先,用vundle来管理插件:"></a>首先,用vundle来管理插件:</h3><p><strong> github stars: 10,272 </strong><br> 地址: <a href="https://github.com/VundleVim/Vundle.vim">github/vundle</a></p>
+<h3 id="u6211_u7684vundle_list_3A"><a href="#u6211_u7684vundle_list_3A" class="headerlink" title="我的vundle list:"></a>我的vundle list:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">" The following are examples of different formats supported.</span><br><span class="line"> " Keep Plugin commands between vundle#<span class="operator"><span class="keyword">begin</span>/<span class="keyword">end</span>.</span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'tmhedberg/SimpylFold'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/syntastic'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'nvie/vim-flake8'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'altercation/vim-colors-solarized'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'jistr/vim-nerdtree-tabs'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Lokaltog/powerline'</span>, &#123;<span class="string">'rtp'</span>: <span class="string">'powerline/bindings/vim/'</span>&#125;</span></span><br></pre></td></tr></table></figure>]]>
+    
+    </summary>
+    
+      <category term="python ide" scheme="http://yoursite.com/tags/python-ide/"/>
+    
+      <category term="vim" scheme="http://yoursite.com/tags/vim/"/>
+    
+      <category term="to be a geek" scheme="http://yoursite.com/categories/to-be-a-geek/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[python的装饰器: decorator]]></title>
