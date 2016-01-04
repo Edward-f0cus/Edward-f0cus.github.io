@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="python json," />
 
 
 
@@ -53,15 +53,24 @@
 
 
 
-<meta name="description" content="Somewhere I belong...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Edward Shen's blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="转载一篇非常好的介绍python对json处理的blog
+
+什么是json：JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python对json的处理（转）">
+<meta property="og:url" content="http://yoursite.com/2016/01/04/python对json的处理（转）/index.html">
 <meta property="og:site_name" content="Edward Shen's blog">
-<meta property="og:description" content="Somewhere I belong...">
+<meta property="og:description" content="转载一篇非常好的介绍python对json处理的blog
+
+什么是json：JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用">
+<meta property="og:image" content="http://7xppkp.com1.z0.glb.clouddn.com/pytojson.png">
+<meta property="og:image" content="http://7xppkp.com1.z0.glb.clouddn.com/jsontopy.png">
+<meta property="og:updated_time" content="2016-01-04T13:33:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Edward Shen's blog">
-<meta name="twitter:description" content="Somewhere I belong...">
+<meta name="twitter:title" content="python对json的处理（转）">
+<meta name="twitter:description" content="转载一篇非常好的介绍python对json处理的blog
+
+什么是json：JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用">
 
 
 
@@ -73,7 +82,7 @@
   };
 </script>
 
-  <title> Edward Shen's blog </title>
+  <title> python对json的处理（转） | Edward Shen's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -94,9 +103,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -193,24 +200,9 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <section id="posts" class="posts-expand">
 
+  <div id="posts" class="posts-expand">
     
-
-    
-    
-      
-      
-        
-        
-        
-      
-
-      
-    
-
-    
-      
 
   
   
@@ -230,10 +222,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/01/04/python对json的处理（转）/" itemprop="url">
-                  python对json的处理（转）
-                </a>
+                python对json的处理（转）
               
             
           </h1>
@@ -288,10 +277,7 @@
       
 
       
-        
-          <span itemprop="articleBody">
-            
-              <blockquote>
+        <span itemprop="articleBody"><blockquote>
 <p>转载一篇非常好的介绍python对json处理的<a href="http://www.cnblogs.com/coser/archive/2011/12/14/2287739.html" target="_blank" rel="external">blog</a></p>
 </blockquote>
 <h5 id="u4EC0_u4E48_u662Fjson_uFF1A"><a href="#u4EC0_u4E48_u662Fjson_uFF1A" class="headerlink" title="什么是json："></a>什么是json：</h5><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。这些特性使JSON成为理想的数据交换语言。</p>
@@ -333,459 +319,69 @@
 <p>上面代码已经写的很清楚了，实质就是自定义object类型和dict类型进行转化。object2dict函数将对象模块名、类名以及<strong>dict</strong>存储在dict对象里，并返回。dict2object函数则是反解出模块名、类名、参数，创建新的对象并返回。在json.dumps 方法中增加default参数，该参数表示在转化过程中调用指定的函数，同样在decode过程中json.loads方法增加object_hook,指定转化函数。</p>
 <h6 id="u65B9_u6CD5_u4E8C_uFF1A_u7EE7_u627FJSONEncoder_u548CJSONDecoder_u7C7B_uFF0C_u8986_u5199_u76F8_u5173_u65B9_u6CD5"><a href="#u65B9_u6CD5_u4E8C_uFF1A_u7EE7_u627FJSONEncoder_u548CJSONDecoder_u7C7B_uFF0C_u8986_u5199_u76F8_u5173_u65B9_u6CD5" class="headerlink" title="方法二：继承JSONEncoder和JSONDecoder类，覆写相关方法"></a>方法二：继承JSONEncoder和JSONDecoder类，覆写相关方法</h6><p>JSONEncoder类负责编码，主要是通过其default函数进行转化，我们可以override该方法。同理对于JSONDecoder。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span><br><span class="line">Created on 2011-12-14</span><br><span class="line">@author: Peter</span><br><span class="line">'''</span></span><br><span class="line"><span class="keyword">import</span> Person</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">p = Person.Person(<span class="string">'Peter'</span>,<span class="number">22</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyEncoder</span><span class="params">(json.JSONEncoder)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">default</span><span class="params">(self,obj)</span>:</span></span><br><span class="line">        <span class="comment">#convert object to a dict</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        d[<span class="string">'__class__'</span>] = obj.__class__.__name__</span><br><span class="line">        d[<span class="string">'__module__'</span>] = obj.__module__</span><br><span class="line">        d.update(obj.__dict__)</span><br><span class="line">        <span class="keyword">return</span> d</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyDecoder</span><span class="params">(json.JSONDecoder)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        json.JSONDecoder.__init__(self,object_hook=self.dict2object)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dict2object</span><span class="params">(self,d)</span>:</span></span><br><span class="line">        <span class="comment">#convert dict to object</span></span><br><span class="line">        <span class="keyword">if</span><span class="string">'__class__'</span> <span class="keyword">in</span> d:</span><br><span class="line">            class_name = d.pop(<span class="string">'__class__'</span>)</span><br><span class="line">            module_name = d.pop(<span class="string">'__module__'</span>)</span><br><span class="line">            module = __import__(module_name)</span><br><span class="line">            class_ = getattr(module,class_name)</span><br><span class="line">            args = dict((key.encode(<span class="string">'ascii'</span>), value) <span class="keyword">for</span> key, value <span class="keyword">in</span> d.items()) <span class="comment">#get args</span></span><br><span class="line">            inst = class_(**args) <span class="comment">#create new instance</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            inst = d</span><br><span class="line">        <span class="keyword">return</span> inst</span><br><span class="line"></span><br><span class="line">d = MyEncoder().encode(p)</span><br><span class="line">o =  MyDecoder().decode(d)</span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> d</span><br><span class="line"><span class="keyword">print</span> type(o), o</span><br></pre></td></tr></table></figure></p>
 <p>对于JSONDecoder类方法，稍微有点不同，但是改写起来也不是很麻烦。看代码应该就比较清楚了。</p>
-
-            
-          </span>
-        
+</span>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/02/我的vim配置/" itemprop="url">
-                  我的vim配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-02T14:25:54+08:00" content="2016-01-02">
-              2016-01-02
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/to-be-a-geek/" itemprop="url" rel="index">
-                    <span itemprop="name">to be a geek</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/python-json/" rel="tag">#python json</a>
           
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/02/我的vim配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/02/我的vim配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
       
 
       
-        
-          <blockquote>
-<p>主要是适配python开发. 都是些github star超高之作.</p>
-</blockquote>
-<h3 id="u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A"><a href="#u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A" class="headerlink" title="首先,用vundle来管理插件:"></a>首先,用vundle来管理插件:</h3><p><strong> github stars: 10,272 </strong><br> 地址: <a href="https://github.com/VundleVim/Vundle.vim">github/vundle</a></p>
-<h3 id="u6211_u7684vundle_list_3A"><a href="#u6211_u7684vundle_list_3A" class="headerlink" title="我的vundle list:"></a>我的vundle list:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">" The following are examples of different formats supported.</span><br><span class="line"> " Keep Plugin commands between vundle#<span class="operator"><span class="keyword">begin</span>/<span class="keyword">end</span>.</span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'tmhedberg/SimpylFold'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/syntastic'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'nvie/vim-flake8'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'altercation/vim-colors-solarized'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'jistr/vim-nerdtree-tabs'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Lokaltog/powerline'</span>, &#123;<span class="string">'rtp'</span>: <span class="string">'powerline/bindings/vim/'</span>&#125;</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/02/我的vim配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/02/我的vim配置/" rel="next" title="我的vim配置">
+                <i class="fa fa-chevron-left"></i> 我的vim配置
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/23/python的装饰器-decorator/" itemprop="url">
-                  python的装饰器: decorator
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T13:09:39+08:00" content="2015-12-23">
-              2015-12-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/23/python的装饰器-decorator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/python的装饰器-decorator/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><strong> 本质上来说, 就是闭包加python的一个语法糖.</strong><br>亲们,让我们从头说起:</p>
-<h5 id="python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61"><a href="#python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61" class="headerlink" title="python中一切皆对象,方法也是一个对象."></a>python中一切皆对象,方法也是一个对象.</h5>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">isinstance(foo, object)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<p>所以TA可以被作为方法的形参传进去, 也可以作为return value被return.<br>我们先记下这一点, 后面会详细说明.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/23/python的装饰器-decorator/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/03/linux中的uniq/" itemprop="url">
-                  linux中的uniq
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-03T13:18:45+08:00" content="2015-11-03">
-              2015-11-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">shell programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/03/linux中的uniq/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/linux中的uniq/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
       
 
       
-        
-          <blockquote>
-<p>昨天有个同事谈到一个笔试题:<br>  <em>用shell在一个文件中找出出现次数top50的50个单词, 前提是在这个文件中每行只有一个单词.</em><br>我们几个讨论了一下, 第一感觉都是用最熟悉的grep, 但要实现起来怕是得很多代码. 晚上回家没事瞎逛, 看到网友在某篇技术博客里提到uniq命令, 以前竟然不知道这个command, 请原谅我的无知…我搜了下用法, 让我立刻意识到这个笔试题可以秒答…</p>
-</blockquote>
-<h3 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h3><p>顾名思义, 这个command就是要列出不重复的项(使唯一). 以前一直感觉shell没有set这个数据类型很不方便, 现在完全可以用此命令来弥补了. 需要注意的是: <strong>uniq只比较相邻两项, 也就是说隔行的重复, TA是不care的. 这个时候就需要配合sort命令.</strong><br>参数如下:<br> <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">u</span>:  列出若干唯一项. 应该<span class="keyword">u</span>是取得uniq的意思.</span><br><span class="line">-<span class="keyword">d</span>:  列出若干重复项. 应该<span class="keyword">d</span>是取得disable uniq的意思.</span><br><span class="line">-f <span class="keyword">n</span>: 忽略前<span class="keyword">n</span>个字段再来做比较. f <span class="keyword">means</span> fields. 字段间的分隔符是空格或者<span class="keyword">TAB</span>. 从0开始计数. 与-<span class="keyword">n</span>等价.</span><br><span class="line">-s <span class="keyword">n</span>:  忽略前<span class="keyword">n</span>个字符. s <span class="keyword">means</span> characters. 从0开始计数. 与+<span class="keyword">n</span>等价.</span><br><span class="line">-i: 忽略大小写. i <span class="keyword">means</span> ignore case.</span><br><span class="line">-c: 计数. c <span class="keyword">means</span> <span class="keyword">count</span>.</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/03/linux中的uniq/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
+
+    <div class="post-spread">
       
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/13/linux控制USB的绑定-解绑/" itemprop="url">
-                  linux控制USB的绑定/解绑
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-10-13T13:16:31+08:00" content="2015-10-13">
-              2015-10-13
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">shell programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/10/13/linux控制USB的绑定-解绑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/linux控制USB的绑定-解绑/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>今天工作中遇到一个问题， 要用代码实现USB的enable和disable. 谷歌了一番, 最终找到理想答案, 我在这里做一个简短porting. 来源：<a href="https://www.linux.com/community/blogs/133-general-linux/727195-disable-a-enable-usb-from-terminal">墙外某博</a></p>
-</blockquote>
-<h4 id="u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A"><a href="#u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A" class="headerlink" title="首先通过lsusb -t来查看USB端口信息："></a>首先通过lsusb -t来查看USB端口信息：</h4>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/13/linux控制USB的绑定-解绑/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
       
     </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+  </div>
 
 
         </div>
@@ -794,6 +390,14 @@
 
 
         
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/04/python对json的处理（转）/"
+           data-title="python对json的处理（转）" data-url="http://yoursite.com/2016/01/04/python对json的处理（转）/">
+      </div>
+    
+  </div>
+
 
       </div>
 
@@ -814,8 +418,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" src="/uploads/Edward.jpg" alt="Edward Shen" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Edward Shen</p>
@@ -885,6 +498,23 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u4EC0_u4E48_u662Fjson_uFF1A"><span class="nav-number">1.</span> <span class="nav-text">什么是json：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JSON_u5EFA_u6784_u4E8E_u4E24_u79CD_u7ED3_u6784_uFF1A"><span class="nav-number">2.</span> <span class="nav-text">JSON建构于两种结构：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BF9_u7B80_u5355_u6570_u636E_u7C7B_u578B_u7684encoding__u548C_decoding_uFF1A"><span class="nav-number">3.</span> <span class="nav-text">对简单数据类型的encoding 和 decoding：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#encoding_3A"><span class="nav-number">3.1.</span> <span class="nav-text">encoding:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#decoding_3A"><span class="nav-number">3.2.</span> <span class="nav-text">decoding:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#dumps_28_29_u53C2_u6570_u8BF4_u660E_uFF1A"><span class="nav-number">3.3.</span> <span class="nav-text">dumps()参数说明：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5904_u7406_u81EA_u5DF1_u7684_u6570_u636E_u7C7B_u578B"><span class="nav-number">4.</span> <span class="nav-text">处理自己的数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#u65B9_u6CD5_u4E00_uFF1A_u81EA_u5DF1_u5199_u8F6C_u5316_u51FD_u6570"><span class="nav-number">4.1.</span> <span class="nav-text">方法一：自己写转化函数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#u65B9_u6CD5_u4E8C_uFF1A_u7EE7_u627FJSONEncoder_u548CJSONDecoder_u7C7B_uFF0C_u8986_u5199_u76F8_u5173_u65B9_u6CD5"><span class="nav-number">4.2.</span> <span class="nav-text">方法二：继承JSONEncoder和JSONDecoder类，覆写相关方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
       
 
     </div>
@@ -972,6 +602,167 @@
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 
