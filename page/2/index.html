@@ -230,6 +230,117 @@
 
     
     
+      
+      
+
+      
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/10/13/linux控制USB的绑定-解绑/" itemprop="url">
+                  linux控制USB的绑定/解绑
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-10-13T13:16:31+08:00" content="2015-10-13">
+              2015-10-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
+                    <span itemprop="name">shell programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/13/linux控制USB的绑定-解绑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/13/linux控制USB的绑定-解绑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>今天工作中遇到一个问题， 要用代码实现USB的enable和disable. 谷歌了一番, 最终找到理想答案, 我在这里做一个简短porting. 来源：<a href="https://www.linux.com/community/blogs/133-general-linux/727195-disable-a-enable-usb-from-terminal">墙外某博</a></p>
+</blockquote>
+<h4 id="u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A"><a href="#u9996_u5148_u901A_u8FC7lsusb_-t_u6765_u67E5_u770BUSB_u7AEF_u53E3_u4FE1_u606F_uFF1A" class="headerlink" title="首先通过lsusb -t来查看USB端口信息："></a>首先通过lsusb -t来查看USB端口信息：</h4>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/10/13/linux控制USB的绑定-解绑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -689,120 +800,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/02/27/bc-command-in-shell/" itemprop="url">
-                  bc command in shell
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-02-27T12:46:13+08:00" content="2015-02-27">
-              2015-02-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">shell programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/02/27/bc-command-in-shell/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/27/bc-command-in-shell/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>  昨天在工作中遇到这么一个问题, 在shell中比较浮点数和整数的大小. 原本以为用shell的比较符号(-lt之类的)就可以, 没想到一试不行.<br> 问了度娘后才发现, shell原则上是不支持浮点数计算的.<br>  因为着急用, 就随便找了个帖子说可以这么比:<br>  <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  expr <span class="variable">$a</span> \&gt; <span class="variable">$b</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
-<p>  我没test就直接先push到公司的repo了, reviewer估计也没用过, 看了下就merge了.<br> 今天跑脚本才发现根本就不能这么用啊, holy shit. 最后找到了bc这个神器, 问了下度娘, 都没什么好文章. 索性就直接上官网看<a href="https://www.gnu.org/software/bc/manual/html_mono/bc.html#SEC3">manual</a>.<br>  好了, 废话说了一大堆, 现在来说说bc吧:)</p>
-</blockquote>
-<p>首先, bc可以是交互性的, 也支持在管道符后面使用.<br>所以一些复杂的有关浮点数的运算, 完全可以结合expect脚本, 个人感觉会很方便. 如果用awk算, 估计会吐…<br>像我昨天遇到的普通运算完全就可以用管道啦.<br>一般来说在脚本中可以这么用:<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=$(bc &#60;&#60; EOF&#10;  28.3 * 55.8&#10;  EOF)</span><br></pre></td></tr></table></figure></p>
-<p>bc可以说totally就是一门语言. 有变量, 有逻辑控制, 亦有函数.<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/27/bc-command-in-shell/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -843,7 +846,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -857,7 +860,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">16</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

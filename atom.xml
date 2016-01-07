@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Somewhere I belong...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-01-04T13:36:49.000Z</updated>
+  <updated>2016-01-07T13:35:39.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,148 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[python调试:pdb基本用法(转)]]></title>
+    <link href="http://yoursite.com/2016/01/07/python%E8%B0%83%E8%AF%95-pdb%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95-%E8%BD%AC/"/>
+    <id>http://yoursite.com/2016/01/07/python调试-pdb基本用法-转/</id>
+    <published>2016-01-07T13:23:21.000Z</published>
+    <updated>2016-01-07T13:35:39.000Z</updated>
+    <content type="html"><![CDATA[<blockquote>
+<p>转自<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/#icomments" target="_blank" rel="external">IBM开发者社区</a>。</p>
+</blockquote>
+<h3 id="u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A"><a href="#u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A" class="headerlink" title="使用pdb进行调试："></a>使用pdb进行调试：</h3><p>pdb 是 python 自带的一个包，为 python 程序提供了一种交互的源代码调试功能，主要特性包括设置断点、单步调试、进入函数调试、查看当前代码、查看栈片段、动态改变变量的值等。pdb 提供了一些常用的调试命令，详情见表 1。</p>
+<ul>
+<li>表 1. pdb 常用命令</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break 或 b 设置断点</td>
+<td>设置断点</td>
+</tr>
+<tr>
+<td>continue 或 c</td>
+<td>继续执行程序</td>
+</tr>
+<tr>
+<td>list 或 l</td>
+<td>查看当前行的代码段</td>
+</tr>
+<tr>
+<td>step 或 s</td>
+<td>进入函数</td>
+</tr>
+<tr>
+<td>return 或 r</td>
+<td>执行代码直到从当前函数返回</td>
+</tr>
+<tr>
+<td>exit 或 q</td>
+<td>中止并退出</td>
+</tr>
+<tr>
+<td>next 或 n</td>
+<td>执行下一行</td>
+</tr>
+<tr>
+<td>pp</td>
+<td>打印变量的值</td>
+</tr>
+<tr>
+<td>help</td>
+<td>帮助</td>
+</tr>
+</tbody>
+</table>
+<p>下面结合具体的实例讲述如何使用 pdb 进行调试。<br><a id="more"></a></p>
+<h4 id="u6E05_u5355_1-__u6D4B_u8BD5_u4EE3_u7801_u793A_u4F8B"><a href="#u6E05_u5355_1-__u6D4B_u8BD5_u4EE3_u7801_u793A_u4F8B" class="headerlink" title="清单 1. 测试代码示例"></a>清单 1. 测试代码示例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdb </span><br><span class="line">a = <span class="string">"aaa"</span></span><br><span class="line">pdb.set_trace() </span><br><span class="line">b = <span class="string">"bbb"</span></span><br><span class="line">c = <span class="string">"ccc"</span></span><br><span class="line">final = a + b + c </span><br><span class="line"><span class="keyword">print</span> final</span><br></pre></td></tr></table></figure>
+<p>开始调试：直接运行脚本，会停留在 pdb.set_trace() 处，选择 n+enter 可以执行当前的 statement。在第一次按下了 n+enter 之后可以直接按 enter 表示重复执行上一条 debug 命令。</p>
+<h4 id="u6E05_u5355_2-__u5229_u7528_pdb__u8C03_u8BD5"><a href="#u6E05_u5355_2-__u5229_u7528_pdb__u8C03_u8BD5" class="headerlink" title="清单 2. 利用 pdb 调试"></a>清单 2. 利用 pdb 调试</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]#  python epdb1.py </span><br><span class="line"> &gt; /root/epdb1.py(4)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(5)?() </span><br><span class="line"> -&gt; c = "ccc"</span><br><span class="line"> (Pdb) </span><br><span class="line"> &gt; /root/epdb1.py(6)?() </span><br><span class="line"> -&gt; final = a + b + c </span><br><span class="line"> (Pdb) list </span><br><span class="line">  1     import pdb </span><br><span class="line">  2     a = "aaa"</span><br><span class="line">  3     pdb.set_trace() </span><br><span class="line">  4     b = "bbb"</span><br><span class="line">  5     c = "ccc"</span><br><span class="line">  6  -&gt; final = a + b + c </span><br><span class="line">  7     print final </span><br><span class="line"> [EOF] </span><br><span class="line"> (Pdb) </span><br><span class="line"> [EOF] </span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(7)?() </span><br><span class="line"> -&gt; print final </span><br><span class="line"> (Pdb)</span><br></pre></td></tr></table></figure>
+<p>退出 debug：使用 quit 或者 q 可以退出当前的 debug，但是 quit 会以一种非常粗鲁的方式退出程序，其结果是直接 crash。</p>
+<h4 id="u6E05_u5355_3-__u9000_u51FA_debug"><a href="#u6E05_u5355_3-__u9000_u51FA_debug" class="headerlink" title="清单 3. 退出 debug"></a>清单 3. 退出 debug</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]#  python epdb1.py </span><br><span class="line"> &gt; /root/epdb1.py(4)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(5)?() </span><br><span class="line"> -&gt; c = "ccc"</span><br><span class="line"> (Pdb) q </span><br><span class="line"> Traceback (most recent call last): </span><br><span class="line">  File "epdb1.py", line 5, in ? </span><br><span class="line">    c = "ccc"</span><br><span class="line">  File "epdb1.py", line 5, in ? </span><br><span class="line">    c = "ccc"</span><br><span class="line">  File "/usr/lib64/python2.4/bdb.py", line 48, in trace_dispatch </span><br><span class="line">    return self.dispatch_line(frame) </span><br><span class="line">  File "/usr/lib64/python2.4/bdb.py", line 67, in dispatch_line </span><br><span class="line">    if self.quitting: raise BdbQuit </span><br><span class="line"> bdb.BdbQuit</span><br></pre></td></tr></table></figure>
+<p>打印变量的值：如果需要在调试过程中打印变量的值，可以直接使用 p 加上变量名，但是需要注意的是打印仅仅在当前的 statement 已经被执行了之后才能看到具体的值，否则会报 NameError: &lt; exceptions.NameError … ….&gt; 错误。</p>
+<h4 id="u6E05_u5355_4-_debug__u8FC7_u7A0B_u4E2D_u6253_u5370_u53D8_u91CF"><a href="#u6E05_u5355_4-_debug__u8FC7_u7A0B_u4E2D_u6253_u5370_u53D8_u91CF" class="headerlink" title="清单 4. debug 过程中打印变量"></a>清单 4. debug 过程中打印变量</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]#  python epdb1.py </span><br><span class="line"> &gt; /root/epdb1.py(4)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(5)?() </span><br><span class="line"> -&gt; c = "ccc"</span><br><span class="line"> (Pdb) p b </span><br><span class="line">'bbb'</span><br><span class="line"> (Pdb) </span><br><span class="line">'bbb'</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(6)?() </span><br><span class="line"> -&gt; final = a + b + c </span><br><span class="line"> (Pdb) p c </span><br><span class="line">'ccc'</span><br><span class="line"> (Pdb) p final </span><br><span class="line"> *** NameError: &lt;exceptions.NameError instance at 0x1551b710 &gt; </span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(7)?() </span><br><span class="line"> -&gt; print final </span><br><span class="line"> (Pdb) p final </span><br><span class="line">'aaabbbccc'</span><br><span class="line"> (Pdb)</span><br></pre></td></tr></table></figure>
+<p>使用 c 可以停止当前的 debug 使程序继续执行。如果在下面的程序中继续有 set_statement() 的申明，则又会重新进入到 debug 的状态，读者可以在代码 print final 之前再加上 set_trace() 验证。</p>
+<h4 id="u6E05_u5355_5-__u505C_u6B62_debug__u7EE7_u7EED_u6267_u884C_u7A0B_u5E8F"><a href="#u6E05_u5355_5-__u505C_u6B62_debug__u7EE7_u7EED_u6267_u884C_u7A0B_u5E8F" class="headerlink" title="清单 5. 停止 debug 继续执行程序"></a>清单 5. 停止 debug 继续执行程序</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]#  python epdb1.py </span><br><span class="line"> &gt; /root/epdb1.py(4)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb1.py(5)?() </span><br><span class="line"> -&gt; c = "ccc"</span><br><span class="line"> (Pdb) c </span><br><span class="line"> aaabbbccc</span><br></pre></td></tr></table></figure>
+<p>显示代码：在 debug 的时候不一定能记住当前的代码块，如要要查看具体的代码块，则可以通过使用 list 或者 l 命令显示。list 会用箭头 -&gt; 指向当前 debug 的语句。</p>
+<h4 id="u6E05_u5355_6-_debug__u8FC7_u7A0B_u4E2D_u663E_u793A_u4EE3_u7801"><a href="#u6E05_u5355_6-_debug__u8FC7_u7A0B_u4E2D_u663E_u793A_u4EE3_u7801" class="headerlink" title="清单 6. debug 过程中显示代码"></a>清单 6. debug 过程中显示代码</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]#  python epdb1.py </span><br><span class="line"> &gt; /root/epdb1.py(4)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) list </span><br><span class="line">  1     import pdb </span><br><span class="line">  2     a = "aaa"</span><br><span class="line">  3     pdb.set_trace() </span><br><span class="line">  4  -&gt; b = "bbb"</span><br><span class="line">  5     c = "ccc"</span><br><span class="line">  6     final = a + b + c </span><br><span class="line">  7     pdb.set_trace() </span><br><span class="line">  8     print final </span><br><span class="line"> [EOF] </span><br><span class="line"> (Pdb) c </span><br><span class="line"> &gt; /root/epdb1.py(8)?() </span><br><span class="line"> -&gt; print final </span><br><span class="line"> (Pdb) list </span><br><span class="line">  3     pdb.set_trace() </span><br><span class="line">  4     b = "bbb"</span><br><span class="line">  5     c = "ccc"</span><br><span class="line">  6     final = a + b + c </span><br><span class="line">  7     pdb.set_trace() </span><br><span class="line">  8  -&gt; print final </span><br><span class="line"> [EOF] </span><br><span class="line"> (Pdb)</span><br></pre></td></tr></table></figure>
+<p>在使用函数的情况下进行 debug</p>
+<h4 id="u6E05_u5355_7-__u4F7F_u7528_u51FD_u6570_u7684_u4F8B_u5B50"><a href="#u6E05_u5355_7-__u4F7F_u7528_u51FD_u6570_u7684_u4F8B_u5B50" class="headerlink" title="清单 7. 使用函数的例子"></a>清单 7. 使用函数的例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pdb </span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">combine</span><span class="params">(s1,s2)</span>:</span>      <span class="comment"># define subroutine combine, which... </span></span><br><span class="line">    s3 = s1 + s2 + s1    <span class="comment"># sandwiches s2 between copies of s1, ... </span></span><br><span class="line">    s3 = <span class="string">'"'</span> + s3 +<span class="string">'"'</span>   <span class="comment"># encloses it in double quotes,... </span></span><br><span class="line">    <span class="keyword">return</span> s3            <span class="comment"># and returns it. </span></span><br><span class="line"> a = <span class="string">"aaa"</span></span><br><span class="line"> pdb.set_trace() </span><br><span class="line"> b = <span class="string">"bbb"</span></span><br><span class="line"> c = <span class="string">"ccc"</span></span><br><span class="line"> final = combine(a,b) </span><br><span class="line"> <span class="keyword">print</span> final</span><br></pre></td></tr></table></figure>
+<p>如果直接使用 n 进行 debug 则到 final=combine(a,b) 这句的时候会将其当做普通的赋值语句处理，进入到 print final。如果想要对函数进行 debug 如何处理呢 ? 可以直接使用 s 进入函数块。函数里面的单步调试与上面的介绍类似。如果不想在函数里单步调试可以在断点处直接按 r 退出到调用的地方。</p>
+<h4 id="u5BF9_u51FD_u6570_u8FDB_u884C_debug"><a href="#u5BF9_u51FD_u6570_u8FDB_u884C_debug" class="headerlink" title="对函数进行 debug"></a>对函数进行 debug</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]# python epdb2.py </span><br><span class="line"> &gt; /root/epdb2.py(10)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(11)?() </span><br><span class="line"> -&gt; c = "ccc"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(12)?() </span><br><span class="line"> -&gt; final = combine(a,b) </span><br><span class="line"> (Pdb) s </span><br><span class="line"> --Call-- </span><br><span class="line"> &gt; /root/epdb2.py(3)combine() </span><br><span class="line"> -&gt; def combine(s1,s2):      # define subroutine combine, which... </span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(4)combine() </span><br><span class="line"> -&gt; s3 = s1 + s2 + s1    # sandwiches s2 between copies of s1, ... </span><br><span class="line"> (Pdb) list </span><br><span class="line">  1     import pdb </span><br><span class="line">  2 </span><br><span class="line">  3     def combine(s1,s2):      # define subroutine combine, which... </span><br><span class="line">  4  -&gt;     s3 = s1 + s2 + s1    # sandwiches s2 between copies of s1, ... </span><br><span class="line">  5         s3 = '"' + s3 +'"'   # encloses it in double quotes,... </span><br><span class="line">  6         return s3            # and returns it. </span><br><span class="line">  7 </span><br><span class="line">  8     a = "aaa"</span><br><span class="line">  9     pdb.set_trace() </span><br><span class="line"> 10     b = "bbb"</span><br><span class="line"> 11     c = "ccc"</span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(5)combine() </span><br><span class="line"> -&gt; s3 = '"' + s3 +'"'   # encloses it in double quotes,... </span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(6)combine() </span><br><span class="line"> -&gt; return s3            # and returns it. </span><br><span class="line"> (Pdb) n </span><br><span class="line"> --Return-- </span><br><span class="line"> &gt; /root/epdb2.py(6)combine()-&gt;'"aaabbbaaa"'</span><br><span class="line"> -&gt; return s3            # and returns it. </span><br><span class="line"> (Pdb) n </span><br><span class="line"> &gt; /root/epdb2.py(13)?() </span><br><span class="line"> -&gt; print final </span><br><span class="line"> (Pdb)</span><br></pre></td></tr></table></figure>
+<p>在调试的时候动态改变值 。在调试的时候可以动态改变变量的值，具体如下实例。需要注意的是下面有个错误，原因是 b 已经被赋值了，如果想重新改变 b 的赋值，则应该使用！ B。</p>
+<h4 id="u6E05_u5355_9-__u5728_u8C03_u8BD5_u7684_u65F6_u5019_u52A8_u6001_u6539_u53D8_u503C"><a href="#u6E05_u5355_9-__u5728_u8C03_u8BD5_u7684_u65F6_u5019_u52A8_u6001_u6539_u53D8_u503C" class="headerlink" title="清单 9. 在调试的时候动态改变值"></a>清单 9. 在调试的时候动态改变值</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@rcc-pok-idg-2255 ~]# python epdb2.py </span><br><span class="line"> &gt; /root/epdb2.py(10)?() </span><br><span class="line"> -&gt; b = "bbb"</span><br><span class="line"> (Pdb) var = "1234"</span><br><span class="line"> (Pdb) b = "avfe"</span><br><span class="line"> *** The specified object '= "avfe"' is not a function </span><br><span class="line"> or was not found along sys.path. </span><br><span class="line"> (Pdb) !b="afdfd"</span><br><span class="line"> (Pdb)</span><br></pre></td></tr></table></figure>
+]]></content>
+    <summary type="html">
+    <![CDATA[<blockquote>
+<p>转自<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/#icomments">IBM开发者社区</a>。</p>
+</blockquote>
+<h3 id="u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A"><a href="#u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A" class="headerlink" title="使用pdb进行调试："></a>使用pdb进行调试：</h3><p>pdb 是 python 自带的一个包，为 python 程序提供了一种交互的源代码调试功能，主要特性包括设置断点、单步调试、进入函数调试、查看当前代码、查看栈片段、动态改变变量的值等。pdb 提供了一些常用的调试命令，详情见表 1。</p>
+<ul>
+<li>表 1. pdb 常用命令</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>break 或 b 设置断点</td>
+<td>设置断点</td>
+</tr>
+<tr>
+<td>continue 或 c</td>
+<td>继续执行程序</td>
+</tr>
+<tr>
+<td>list 或 l</td>
+<td>查看当前行的代码段</td>
+</tr>
+<tr>
+<td>step 或 s</td>
+<td>进入函数</td>
+</tr>
+<tr>
+<td>return 或 r</td>
+<td>执行代码直到从当前函数返回</td>
+</tr>
+<tr>
+<td>exit 或 q</td>
+<td>中止并退出</td>
+</tr>
+<tr>
+<td>next 或 n</td>
+<td>执行下一行</td>
+</tr>
+<tr>
+<td>pp</td>
+<td>打印变量的值</td>
+</tr>
+<tr>
+<td>help</td>
+<td>帮助</td>
+</tr>
+</tbody>
+</table>
+<p>下面结合具体的实例讲述如何使用 pdb 进行调试。<br>]]>
+    
+    </summary>
+    
+      <category term="pdb" scheme="http://yoursite.com/tags/pdb/"/>
+    
+      <category term="python programming" scheme="http://yoursite.com/categories/python-programming/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[python对json的处理（转）]]></title>
