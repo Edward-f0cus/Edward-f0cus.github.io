@@ -262,8 +262,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/07/python调试-pdb基本用法-转/" itemprop="url">
-                  python调试:pdb基本用法(转)
+                <a class="post-title-link" href="/2016/01/26/argparser模块学习/" itemprop="url">
+                  argparser模块学习
                 </a>
               
             
@@ -273,34 +273,19 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2016-01-07T21:23:21+08:00" content="2016-01-07">
-              2016-01-07
+            <time itemprop="dateCreated" datetime="2016-01-26T00:25:23+08:00" content="2016-01-26">
+              2016-01-26
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/01/07/python调试-pdb基本用法-转/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/07/python调试-pdb基本用法-转/" itemprop="commentsCount"></span>
+                <a href="/2016/01/26/argparser模块学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/26/argparser模块学习/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -321,488 +306,12 @@
       
         
           <blockquote>
-<p>转自<a href="http://www.ibm.com/developerworks/cn/linux/l-cn-pythondebugger/#icomments">IBM开发者社区</a>。</p>
+<p>经常用的模块, 也是老用老忘, 用一次学一次. 写篇blog, 加深印象. refer to: <a href="https://docs.python.org/2.7/howto/argparse.html#id1">python howto</a></p>
 </blockquote>
-<h3 id="u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A"><a href="#u4F7F_u7528pdb_u8FDB_u884C_u8C03_u8BD5_uFF1A" class="headerlink" title="使用pdb进行调试："></a>使用pdb进行调试：</h3><p>pdb 是 python 自带的一个包，为 python 程序提供了一种交互的源代码调试功能，主要特性包括设置断点、单步调试、进入函数调试、查看当前代码、查看栈片段、动态改变变量的值等。pdb 提供了一些常用的调试命令，详情见表 1。</p>
-<ul>
-<li>表 1. pdb 常用命令</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>break 或 b 设置断点</td>
-<td>设置断点</td>
-</tr>
-<tr>
-<td>continue 或 c</td>
-<td>继续执行程序</td>
-</tr>
-<tr>
-<td>list 或 l</td>
-<td>查看当前行的代码段</td>
-</tr>
-<tr>
-<td>step 或 s</td>
-<td>进入函数</td>
-</tr>
-<tr>
-<td>return 或 r</td>
-<td>执行代码直到从当前函数返回</td>
-</tr>
-<tr>
-<td>exit 或 q</td>
-<td>中止并退出</td>
-</tr>
-<tr>
-<td>next 或 n</td>
-<td>执行下一行</td>
-</tr>
-<tr>
-<td>pp</td>
-<td>打印变量的值</td>
-</tr>
-<tr>
-<td>help</td>
-<td>帮助</td>
-</tr>
-</tbody>
-</table>
-<p>下面结合具体的实例讲述如何使用 pdb 进行调试。<br>
+<h5 id="argument_u548Cparameter_u7684_u533A_u522B_3A"><a href="#argument_u548Cparameter_u7684_u533A_u522B_3A" class="headerlink" title="argument和parameter的区别:"></a>argument和parameter的区别:</h5><p>其实跟今天的主题没多大关系, 顺便说一下, 因为看一些英文的技术文章, 会经常用这两个概念.<br>parameter就相当于java里的”形参”:<br><em>方法/函数定义时在括号里的参数</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">explain_param_vs_arg</span><span class="params">(param1, param2)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> param1, param2</span><br></pre></td></tr></table></figure></p>
+<p>argument就是所谓”实参”:<br><em>调用方法/函数时括号里的参数</em><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain_param_vs_arg(<span class="string">"arg1"</span>, <span class="string">"arg2"</span>)</span><br></pre></td></tr></table></figure></p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/07/python调试-pdb基本用法-转/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/python对json的处理（转）/" itemprop="url">
-                  python对json的处理（转）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-04T20:10:15+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/python对json的处理（转）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/python对json的处理（转）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>转载一篇非常好的介绍python对json处理的<a href="http://www.cnblogs.com/coser/archive/2011/12/14/2287739.html">blog</a></p>
-</blockquote>
-<h5 id="u4EC0_u4E48_u662Fjson_uFF1A"><a href="#u4EC0_u4E48_u662Fjson_uFF1A" class="headerlink" title="什么是json："></a>什么是json：</h5><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。这些特性使JSON成为理想的数据交换语言。</p>
-<h5 id="JSON_u5EFA_u6784_u4E8E_u4E24_u79CD_u7ED3_u6784_uFF1A"><a href="#JSON_u5EFA_u6784_u4E8E_u4E24_u79CD_u7ED3_u6784_uFF1A" class="headerlink" title="JSON建构于两种结构："></a>JSON建构于两种结构：</h5><p>“名称/值”对的集合（A collection of name/value pairs）。不同的语言中，它被理解为对象（object），纪录（record），结构（struct），字典（dictionary），哈希表（hash table），有键列表（keyed list），或者关联数组 （associative array）。<br>值的有序列表（An ordered list of values）。在大部分语言中，它被理解为数组（array）。<br>这些都是常见的数据结构。事实上大部分现代计算机语言都以某种形式支持它们。这使得一种数据格式在同样基于这些结构的编程语言之间交换成为可能。</p>
-<p>jso官方说明参见：<a href="http://json.org/">http://json.org/</a></p>
-<p>Python操作json的标准api库参考：<a href="http://docs.python.org/library/json.html">http://docs.python.org/library/json.html</a><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/04/python对json的处理（转）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/02/我的vim配置/" itemprop="url">
-                  我的vim配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-02T14:25:54+08:00" content="2016-01-02">
-              2016-01-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/to-be-a-geek/" itemprop="url" rel="index">
-                    <span itemprop="name">to be a geek</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/02/我的vim配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/02/我的vim配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>主要是适配python开发. 都是些github star超高之作.</p>
-</blockquote>
-<h3 id="u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A"><a href="#u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A" class="headerlink" title="首先,用vundle来管理插件:"></a>首先,用vundle来管理插件:</h3><p><strong> github stars: 10,272 </strong><br> 地址: <a href="https://github.com/VundleVim/Vundle.vim">github/vundle</a></p>
-<h3 id="u6211_u7684vundle_list_3A"><a href="#u6211_u7684vundle_list_3A" class="headerlink" title="我的vundle list:"></a>我的vundle list:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">" The following are examples of different formats supported.</span><br><span class="line"> " Keep Plugin commands between vundle#<span class="operator"><span class="keyword">begin</span>/<span class="keyword">end</span>.</span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'tmhedberg/SimpylFold'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/syntastic'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'nvie/vim-flake8'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'altercation/vim-colors-solarized'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'jistr/vim-nerdtree-tabs'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Lokaltog/powerline'</span>, &#123;<span class="string">'rtp'</span>: <span class="string">'powerline/bindings/vim/'</span>&#125;</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/02/我的vim配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/23/python的装饰器-decorator/" itemprop="url">
-                  python的装饰器: decorator
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-23T13:09:39+08:00" content="2015-12-23">
-              2015-12-23
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/23/python的装饰器-decorator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/python的装饰器-decorator/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <p><strong> 本质上来说, 就是闭包加python的一个语法糖.</strong><br>亲们,让我们从头说起:</p>
-<h5 id="python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61"><a href="#python_u4E2D_u4E00_u5207_u7686_u5BF9_u8C61_2C_u65B9_u6CD5_u4E5F_u662F_u4E00_u4E2A_u5BF9_u8C61" class="headerlink" title="python中一切皆对象,方法也是一个对象."></a>python中一切皆对象,方法也是一个对象.</h5>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">foo</span><span class="params">()</span>:</span></span><br><span class="line">      <span class="keyword">print</span> <span class="string">'this is func foo'</span></span><br><span class="line"></span><br><span class="line">isinstance(foo, object)</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<p>所以TA可以被作为方法的形参传进去, 也可以作为return value被return.<br>我们先记下这一点, 后面会详细说明.</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/23/python的装饰器-decorator/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/03/linux中的uniq/" itemprop="url">
-                  linux中的uniq
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-11-03T13:18:45+08:00" content="2015-11-03">
-              2015-11-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/shell-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">shell programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/11/03/linux中的uniq/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/03/linux中的uniq/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>昨天有个同事谈到一个笔试题:<br>  <em>用shell在一个文件中找出出现次数top50的50个单词, 前提是在这个文件中每行只有一个单词.</em><br>我们几个讨论了一下, 第一感觉都是用最熟悉的grep, 但要实现起来怕是得很多代码. 晚上回家没事瞎逛, 看到网友在某篇技术博客里提到uniq命令, 以前竟然不知道这个command, 请原谅我的无知…我搜了下用法, 让我立刻意识到这个笔试题可以秒答…</p>
-</blockquote>
-<h3 id="uniq"><a href="#uniq" class="headerlink" title="uniq"></a>uniq</h3><p>顾名思义, 这个command就是要列出不重复的项(使唯一). 以前一直感觉shell没有set这个数据类型很不方便, 现在完全可以用此命令来弥补了. 需要注意的是: <strong>uniq只比较相邻两项, 也就是说隔行的重复, TA是不care的. 这个时候就需要配合sort命令.</strong><br>参数如下:<br> <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">u</span>:  列出若干唯一项. 应该<span class="keyword">u</span>是取得uniq的意思.</span><br><span class="line">-<span class="keyword">d</span>:  列出若干重复项. 应该<span class="keyword">d</span>是取得disable uniq的意思.</span><br><span class="line">-f <span class="keyword">n</span>: 忽略前<span class="keyword">n</span>个字段再来做比较. f <span class="keyword">means</span> fields. 字段间的分隔符是空格或者<span class="keyword">TAB</span>. 从0开始计数. 与-<span class="keyword">n</span>等价.</span><br><span class="line">-s <span class="keyword">n</span>:  忽略前<span class="keyword">n</span>个字符. s <span class="keyword">means</span> characters. 从0开始计数. 与+<span class="keyword">n</span>等价.</span><br><span class="line">-i: 忽略大小写. i <span class="keyword">means</span> ignore case.</span><br><span class="line">-c: 计数. c <span class="keyword">means</span> <span class="keyword">count</span>.</span><br></pre></td></tr></table></figure></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/11/03/linux中的uniq/#more" rel="contents">
+            <a class="btn" href="/2016/01/26/argparser模块学习/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -870,7 +379,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -884,7 +393,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

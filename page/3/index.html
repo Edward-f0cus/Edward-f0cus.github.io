@@ -230,11 +230,112 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/03/15/python-list的一些技巧/" itemprop="url">
+                  python list的一些技巧
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-03-15T12:55:20+08:00" content="2015-03-15">
+              2015-03-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python-programming/" itemprop="url" rel="index">
+                    <span itemprop="name">python programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/03/15/python-list的一些技巧/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/15/python-list的一些技巧/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
       
 
       
-    
+        
+          <blockquote>
+<p>觉得很有用, 摘抄自: <a href="http://enml.github.io/site/2014/04/25/python-code/">http://enml.github.io/site/2014/04/25/python-code/</a></p>
+</blockquote>
+<h4 id="u5217_u8868_u76F8_u90BB_u5143_u7D20_u538B_u7F29_u5668"><a href="#u5217_u8868_u76F8_u90BB_u5143_u7D20_u538B_u7F29_u5668" class="headerlink" title="列表相邻元素压缩器"></a>列表相邻元素压缩器</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="prompt">&gt;&gt;</span>&gt; a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(*([iter(a)] * <span class="number">2</span>))</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent = lambda a, <span class="symbol">k:</span> zip(*([iter(a)] * k))</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">3</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">2</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">1</span>)</span><br><span class="line">[(<span class="number">1</span>,), (<span class="number">2</span>,), (<span class="number">3</span>,), (<span class="number">4</span>,), (<span class="number">5</span>,), (<span class="number">6</span>,)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(a[<span class="symbol">:</span><span class="symbol">:</span><span class="number">2</span>], a[<span class="number">1</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">2</span>])</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; zip(a[<span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>], a[<span class="number">1</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>], a[<span class="number">2</span><span class="symbol">:</span><span class="symbol">:</span><span class="number">3</span>])</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent = lambda a, <span class="symbol">k:</span> zip(*(a[<span class="symbol">i:</span><span class="symbol">:k</span>] for i in range(k)))</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">3</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>), (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">2</span>)</span><br><span class="line">[(<span class="number">1</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">6</span>)]</span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt; group_adjacent(a, <span class="number">1</span>)</span><br><span class="line">[(<span class="number">1</span>,), (<span class="number">2</span>,), (<span class="number">3</span>,), (<span class="number">4</span>,), (<span class="number">5</span>,), (<span class="number">6</span>,)]</span><br></pre></td></tr></table></figure>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/15/python-list的一些技巧/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -391,7 +492,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -405,7 +506,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
