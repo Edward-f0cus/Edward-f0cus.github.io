@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python logging,模块学习," />
+  <meta name="keywords" content="boot,linux," />
 
 
 
@@ -53,88 +53,31 @@
 
 
 
-<meta name="description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
-
-各个level的说明(按等级高低排序):
-
-
-levels
-说明  
-
-
-
-
-DEBUG
-用来诊断是否有bug的详细信息
-
-
-INFO
-确认程序按预想的执行
-
-
-WARNING
-提示有不期望的事情发生, 或者可能会引起某些未来的问题
-
-
-ERROR
-提示">
+<meta name="description" content="简述:
+硬件主动读取BIOS. BIOS会检测硬件并做自我测试.
+BIOS根据配置获取第一个可以启动的装置, 并读取运行第一个气动装置内MBR的boot loader(即grub)
+bootloader会把kernel解压并加载到内存中. kernel会检测硬件并安装驱动程序.
+硬件驱动成功之后, kernel主动call init进程, init会获取run level
+init运行/etc/r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="logging模块学习">
-<meta property="og:url" content="http://yoursite.com/2015/08/20/logging模块学习/index.html">
+<meta property="og:title" content="Linux学习笔记(boot)">
+<meta property="og:url" content="http://yoursite.com/2016/08/06/Linux学习笔记-boot/index.html">
 <meta property="og:site_name" content="Edward Shen's blog">
-<meta property="og:description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
-
-各个level的说明(按等级高低排序):
-
-
-levels
-说明  
-
-
-
-
-DEBUG
-用来诊断是否有bug的详细信息
-
-
-INFO
-确认程序按预想的执行
-
-
-WARNING
-提示有不期望的事情发生, 或者可能会引起某些未来的问题
-
-
-ERROR
-提示">
-<meta property="og:updated_time" content="2016-01-25T16:41:39.000Z">
+<meta property="og:description" content="简述:
+硬件主动读取BIOS. BIOS会检测硬件并做自我测试.
+BIOS根据配置获取第一个可以启动的装置, 并读取运行第一个气动装置内MBR的boot loader(即grub)
+bootloader会把kernel解压并加载到内存中. kernel会检测硬件并安装驱动程序.
+硬件驱动成功之后, kernel主动call init进程, init会获取run level
+init运行/etc/r">
+<meta property="og:updated_time" content="2016-08-06T03:31:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="logging模块学习">
-<meta name="twitter:description" content="这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: python tutorial
-
-各个level的说明(按等级高低排序):
-
-
-levels
-说明  
-
-
-
-
-DEBUG
-用来诊断是否有bug的详细信息
-
-
-INFO
-确认程序按预想的执行
-
-
-WARNING
-提示有不期望的事情发生, 或者可能会引起某些未来的问题
-
-
-ERROR
-提示">
+<meta name="twitter:title" content="Linux学习笔记(boot)">
+<meta name="twitter:description" content="简述:
+硬件主动读取BIOS. BIOS会检测硬件并做自我测试.
+BIOS根据配置获取第一个可以启动的装置, 并读取运行第一个气动装置内MBR的boot loader(即grub)
+bootloader会把kernel解压并加载到内存中. kernel会检测硬件并安装驱动程序.
+硬件驱动成功之后, kernel主动call init进程, init会获取run level
+init运行/etc/r">
 
 
 
@@ -146,7 +89,7 @@ ERROR
   };
 </script>
 
-  <title> logging模块学习 | Edward Shen's blog </title>
+  <title> Linux学习笔记(boot) | Edward Shen's blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -317,7 +260,7 @@ ERROR
             
             
               
-                logging模块学习
+                Linux学习笔记(boot)
               
             
           </h1>
@@ -326,8 +269,8 @@ ERROR
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-08-20T13:04:50+08:00" content="2015-08-20">
-              2015-08-20
+            <time itemprop="dateCreated" datetime="2016-08-06T11:20:16+08:00" content="2016-08-06">
+              2016-08-06
             </time>
           </span>
 
@@ -336,8 +279,8 @@ ERROR
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
+                  <a href="/categories/linux-os/" itemprop="url" rel="index">
+                    <span itemprop="name">linux os</span>
                   </a>
                 </span>
 
@@ -352,8 +295,8 @@ ERROR
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/20/logging模块学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/20/logging模块学习/" itemprop="commentsCount"></span>
+                <a href="/2016/08/06/Linux学习笔记-boot/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/06/Linux学习笔记-boot/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -372,54 +315,138 @@ ERROR
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>这个模块经常用, 由于用法比较复杂, 老是用一次忘一次. 今天写一篇学习笔记, 加深印象. refer to: <a href="https://docs.python.org/2.7/howto/logging.html" target="_blank" rel="external">python tutorial</a></p>
-</blockquote>
-<h5 id="u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A"><a href="#u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A" class="headerlink" title="各个level的说明(按等级高低排序):"></a>各个level的说明(按等级高低排序):</h5><table>
-<thead>
-<tr>
-<th>levels</th>
-<th>说明  </th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DEBUG</td>
-<td>用来诊断是否有bug的详细信息</td>
-</tr>
-<tr>
-<td>INFO</td>
-<td>确认程序按预想的执行</td>
-</tr>
-<tr>
-<td>WARNING</td>
-<td>提示有不期望的事情发生, 或者可能会引起某些未来的问题</td>
-</tr>
-<tr>
-<td>ERROR</td>
-<td>提示某些更严重的信息, 已经引起某些功能的丧失</td>
-</tr>
-<tr>
-<td>CRITICAL</td>
-<td>提示某些更严重的错误, 这些错误会导致程序不能往下执行</td>
-</tr>
-</tbody>
-</table>
-<a id="more"></a>
-<h5 id="u6A21_u5757_u4F7F_u7528_3A"><a href="#u6A21_u5757_u4F7F_u7528_3A" class="headerlink" title="模块使用:"></a>模块使用:</h5><h6 id="u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A"><a href="#u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A" class="headerlink" title="首先需要logging.basicConfig()来配置, 以下是参数说明:"></a>首先需要logging.basicConfig()来配置, 以下是参数说明:</h6><ol>
-<li>filename: 指定log文件存放位置.</li>
-<li>filemode: 与filename搭配使用. 如果赋值为’w’, 执行生成的log会覆盖上次的文件.</li>
-<li>level: 指定log的等级. 比如赋值为logging.DEBUG, 则包括DEBUG以及比DEBUG更重要的等级. 默认的level值是logging.WARNING</li>
-<li><p>format: 需要对<a href="https://docs.python.org/2.7/library/logging.html#logrecord-attributes" target="_blank" rel="external">logRecord attributes</a>引用. 引用方式为: %(attr)s</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.<span class="function"><span class="title">basicConfig</span><span class="params">(format=<span class="string">'%(asctime)s %(message)s'</span>, ...)</span></span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果format里使用了asctime, 那么datefmt参数可以配置时间显示方式:</p>
-<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">logging.basicConfig(<span class="keyword">format</span>=<span class="string">'%(asctime)s, datefmt='</span><span class="variable">%m</span>/<span class="variable">%d</span>/<span class="variable">%Y</span>  <span class="variable">%H</span>:<span class="variable">%M</span>:<span class="variable">%S</span><span class="string">')</span></span><br></pre></td></tr></table></figure>
-</li>
+        <span itemprop="articleBody"><h5 id="u7B80_u8FF0_3A"><a href="#u7B80_u8FF0_3A" class="headerlink" title="简述:"></a>简述:</h5><ol>
+<li>硬件主动读取BIOS. BIOS会检测硬件并做自我测试.</li>
+<li>BIOS根据配置获取第一个可以启动的装置, 并读取运行第一个气动装置内MBR的boot loader(即grub)</li>
+<li>bootloader会把kernel解压并加载到内存中. kernel会检测硬件并安装驱动程序.</li>
+<li>硬件驱动成功之后, kernel主动call init进程, init会获取run level</li>
+<li>init运行<code>/etc/rc.d/rc.sysinit</code>文件准备软件运行的作业环境(网络/时区等)</li>
+<li>init将run level的各个服务启动</li>
+<li>init运行<code>/etc/rc.d/rc.local</code>文件</li>
+<li>init运行终端模拟程序mingetty来启动login进程, 然后等待用户登陆.<a id="more"></a>
+<h5 id="BIOS_3A"><a href="#BIOS_3A" class="headerlink" title="BIOS:"></a>BIOS:</h5></li>
 </ol>
-<h5 id="u5176_u4ED6_u7528_u6CD5_3A"><a href="#u5176_u4ED6_u7528_u6CD5_3A" class="headerlink" title="其他用法:"></a>其他用法:</h5><p>可以在执行python文件时命令行指定level等级:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--log=INFO</span></span><br></pre></td></tr></table></figure></p>
-<p>在python文件中获取:<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">numeric = <span class="function"><span class="title">getattr</span><span class="params">(logging, loglevel.upper()</span></span>, None)</span><br><span class="line"><span class="keyword">if</span> not <span class="function"><span class="title">isinstance</span><span class="params">(numeric, int)</span></span>:</span><br><span class="line">        raise <span class="function"><span class="title">ValueError</span><span class="params">(<span class="string">'Invalid log level %s'</span> % loglevel)</span></span></span><br><span class="line">logging.<span class="function"><span class="title">basicConfig</span><span class="params">(level=numeric, ....)</span></span></span><br></pre></td></tr></table></figure></p>
-<p>还有很多高阶的用法, 一般用不到. 如果你感兴趣, 可参考: <a href="https://docs.python.org/2.7/howto/logging.html#logging-advanced-tutorial" target="_blank" rel="external">advanced usage of logging</a></p>
+<ul>
+<li>BIOS启动后, 会加载CMOS, 然后获取硬件配置. 例如: 硬盘的大小和类型, 系统时间, CPU与各硬件的沟通时脉等.</li>
+<li>然后进行自我检测(POST), 并配置PnP(plug and play), 再定义出可启动的装置顺序.</li>
+<li>开始启动装置的数据读取.<h5 id="MBR_3A"><a href="#MBR_3A" class="headerlink" title="MBR:"></a>MBR:</h5></li>
+<li>master boot record: 在可启动装置的第一个磁区.</li>
+<li>BIOS是通过硬件的INT 13中断功能来读取MBR的. 也就是说只要BIOS能侦测到你的硬件, 就有办法通过INT13来读取硬件的MBR.<h5 id="bootloader_3A"><a href="#bootloader_3A" class="headerlink" title="bootloader:"></a>bootloader:</h5></li>
+<li>核心功能:<ul>
+<li>提供菜单选择界面</li>
+<li>加载kernel</li>
+<li>转交给其他loader(MBR里的loader有可能转交给boot sector里的loader, 或直接启动linux)</li>
+</ul>
+</li>
+<li>操作系统决定将bootloader装到MBR还是boot sector. windows两个地方都会装, windows的boot loader不具备转交功能.</li>
+<li>现在的boot loader都是用grub，grub的配置文件：<code>/etc/grub/menu.lst</code><h5 id="u52A0_u8F7Dkernel_u4E0Einitrd_u529F_u80FD"><a href="#u52A0_u8F7Dkernel_u4E0Einitrd_u529F_u80FD" class="headerlink" title="加载kernel与initrd功能"></a>加载kernel与initrd功能</h5></li>
+<li>bootloader会把kernel加载到内存中, 然后kernel会再次检测各个硬件并加载各个硬件的驱动, 包括存储设备/CPU/网卡/声卡等.</li>
+<li>kernel的存放地址: <code>/boot/vmlinuz-$version</code>(<code>/boot</code>在硬盘中, 建议单独分区)</li>
+<li>kernel动态加载kernel module, 后者放在<code>/lib/molules/</code>. <code>/lib</code>与<code>/</code>不能在不同分区下,  启动过程中kernel必须挂载根目录, 否则会无法加载模块. 系统启动过程中根目录是只读模式</li>
+<li>如果kernel不能识别挂载根目录的文件系统, 就会用到initrd(init ram disk). 是一种伪文件系统, 实际上加载在内存中. 它也能被bootloader加载到内存中, 并解压然后在内存中模拟一个根目录, 用来加载启动过程中最需要的模块, 通常是文件系统和磁碟介面的驱动. </li>
+<li>加载完成后会call<code>/sbin/init</code>开始后续启动流程.<h5 id="init_u4EE5_u53CA/etc/inittab_u914D_u7F6E_u6587_u4EF6_u4E0Erun_level"><a href="#init_u4EE5_u53CA/etc/inittab_u914D_u7F6E_u6587_u4EF6_u4E0Erun_level" class="headerlink" title="init以及/etc/inittab配置文件与run level"></a>init以及<code>/etc/inittab</code>配置文件与run level</h5></li>
+<li><code>/sbin/init</code>是为软件运行准备环境. 包括分配主机名/网络配置/语系处理/文件系统格式以及其他服务.</li>
+<li><p>runlevel分七个等级:</p>
+<ul>
+<li>0 - halt(系统直接关机)</li>
+<li>1 - single user mode(单人维护模式)</li>
+<li>2 - multi-user without nfs</li>
+<li>3 - full multi-user mode</li>
+<li>4 - unused(系统保留功能)</li>
+<li>5 - X11(与level3类似, 但加载使用X window)</li>
+<li>6 - reboot</li>
+</ul>
+</li>
+<li><p>runlevel通过<code>/etc/inittab</code>来获取</p>
+</li>
+<li><p><code>/etc/inittab</code>内容:</p>
+<ul>
+<li>默认runlevel配置</li>
+<li>准备系统软件运行环境的脚本(<code>/etc/rc.d/rc.sysinit</code>)</li>
+<li>7个不同level所要启动服务的脚本放置路径</li>
+<li>是否允许ctrlaltdel重新启动</li>
+<li>不断电系统(UPS)的相关配置</li>
+<li>默认启动的tty(respawn方式, 即关掉后会被立即重启)</li>
+<li>xwindow的启动相关</li>
+</ul>
+</li>
+<li><p><code>/etc/rc.d/rc.sysinit</code>:</p>
+<ul>
+<li>通过读取<code>/etc/sysconfig/network</code>获取网络环境配置以及主机名称</li>
+<li>测试并且挂载内存装置<code>/proc</code>和<code>/sys</code>.</li>
+<li>决定是否启动SELinux</li>
+<li>启动系统的RANDOM程序. 后者可以帮助系统进行密码加密.</li>
+<li>配备terminal的字体</li>
+<li>配置欢迎页面</li>
+<li>配置系统时间和时区</li>
+<li>根据kernel在启动时的检测结果检测网络/ide/scsi/音效等设备</li>
+<li>使用者自定义模块的加载. 使用者可以在<code>/etc/sysconfig/modules/*.modules</code>加入自定义的模块.</li>
+<li>加载kernel的相关配置. (<code>/etc/sysctl.conf</code>)</li>
+<li>重新以可读可写方式挂载各目录.</li>
+<li>启动quota功能</li>
+<li>清楚启动过程产生的缓存文件</li>
+<li>将启动相关操作记录在<code>/var/log/dmesg</code>里.</li>
+</ul>
+</li>
+<li><p><code>/etc/rc.d/rc n</code>和<code>/etc/sysconfig</code></p>
+<ul>
+<li><code>/etc/rc.d/rc $n</code>: 启动runlevel为n的各项服务<ul>
+<li>找到<code>/etc/rc$n.d/K*</code>,并进行stop动作.</li>
+<li>找到<code>/etc/rc$n.d/S*</code>, 并进行start动作.</li>
+<li><code>/etc/rc$n.d/K*</code>和<code>/etc/rc$n.d/S*</code>都是一些连接, 指向standalone的<code>/etc/init.d/*</code>的各个shell脚本</li>
+<li><code>chkconfig</code>就是对这些shell脚本的控制</li>
+<li>K和S后面的数字代表被执行的顺序, 最后一个是<code>/etc/init.d/rc.local</code></li>
+<li>这个脚本可以执行用户自定义的一些行为, 如发email等.</li>
+</ul>
+</li>
+<li><code>/etc/sysconfig/</code>存放这<code>/etc/rc.d/sysinit</code>和<code>/etc/rc.d/rc n</code>的配置文件<ul>
+<li>authconfig</li>
+<li>clock</li>
+<li>i18n</li>
+<li>keyboard &amp; mouse</li>
+<li>network</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>run level</p>
+<ul>
+<li>查看: <code>runlevel</code></li>
+<li>修改: <code>init $n</code><ul>
+<li>会关闭多出来的<code>/etc/rc$n.d/K*</code>脚本</li>
+<li>会启动多出来的<code>/etc/rc$n.d/S*</code>脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>kernel and kernel module</p>
+<ul>
+<li>kernel源码存放位置<code>/usr/src/kernels</code></li>
+<li>kernel版本：<code>/proc/version</code></li>
+<li>kernel module存放的位置：<strong>/lib/modules/`uname -r`/kernel</strong></li>
+<li>如果有本地module需要加直接copy到上述目录， 然后depmod添加依赖关系</li>
+<li><code>lsmod</code>: 列出所有module，并显示依赖关系。</li>
+<li>module文件都以<code>.ko</code>结尾。</li>
+<li>查看module的详细信息：<code>modinfo</code></li>
+<li>安装与删除module<ul>
+<li><code>insmod</code>&amp; <code>rmmod</code>：只是安装卸载，不解决模块依赖性， 并且需要完整的文件名。</li>
+<li><code>modprobe</code> &amp; <code>modprobe -r</code>: 推荐使用， 解决依赖性，并不需要完整的文件名</li>
+</ul>
+</li>
+<li><code>/etc/modprobe.conf</code>: 模块一些额外配置，比如网卡对各个网络的I/O和IRQ设置</li>
+</ul>
+</li>
+<li>initrd:<ul>
+<li>需要initrd的情况：<ul>
+<li>根目录挂载在特殊硬件上: 例如U盘等</li>
+<li>特殊的文件系统</li>
+<li>其他必须要在核心加载时提供的模块</li>
+</ul>
+</li>
+<li><code>mkinitrd</code>来创建initrd</li>
+</ul>
+</li>
+</ul>
 </span>
       
     </div>
@@ -428,9 +455,9 @@ ERROR
       
         <div class="post-tags">
           
-            <a href="/tags/python-logging/" rel="tag">#python logging</a>
+            <a href="/tags/boot/" rel="tag">#boot</a>
           
-            <a href="/tags/模块学习/" rel="tag">#模块学习</a>
+            <a href="/tags/linux/" rel="tag">#linux</a>
           
         </div>
       
@@ -439,17 +466,13 @@ ERROR
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/17/subprocess模块学习/" rel="next" title="subprocess模块学习">
-                <i class="fa fa-chevron-left"></i> subprocess模块学习
+              <a href="/2016/01/26/argparser模块学习/" rel="next" title="argparser模块学习">
+                <i class="fa fa-chevron-left"></i> argparser模块学习
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/10/13/linux控制USB的绑定-解绑/" rel="prev" title="linux控制USB的绑定/解绑">
-                linux控制USB的绑定/解绑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,8 +522,8 @@ ERROR
         
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/20/logging模块学习/"
-           data-title="logging模块学习" data-url="http://yoursite.com/2015/08/20/logging模块学习/">
+      <div class="ds-thread" data-thread-key="2016/08/06/Linux学习笔记-boot/"
+           data-title="Linux学习笔记(boot)" data-url="http://yoursite.com/2016/08/06/Linux学习笔记-boot/">
       </div>
     
   </div>
@@ -615,7 +638,7 @@ ERROR
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5404_u4E2Alevel_u7684_u8BF4_u660E_28_u6309_u7B49_u7EA7_u9AD8_u4F4E_u6392_u5E8F_29_3A"><span class="nav-number">1.</span> <span class="nav-text">各个level的说明(按等级高低排序):</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6A21_u5757_u4F7F_u7528_3A"><span class="nav-number">2.</span> <span class="nav-text">模块使用:</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#u9996_u5148_u9700_u8981logging-basicConfig_28_29_u6765_u914D_u7F6E_2C__u4EE5_u4E0B_u662F_u53C2_u6570_u8BF4_u660E_3A"><span class="nav-number">2.1.</span> <span class="nav-text">首先需要logging.basicConfig()来配置, 以下是参数说明:</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5176_u4ED6_u7528_u6CD5_3A"><span class="nav-number">3.</span> <span class="nav-text">其他用法:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u7B80_u8FF0_3A"><span class="nav-number">1.</span> <span class="nav-text">简述:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BIOS_3A"><span class="nav-number">2.</span> <span class="nav-text">BIOS:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#MBR_3A"><span class="nav-number">3.</span> <span class="nav-text">MBR:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#bootloader_3A"><span class="nav-number">4.</span> <span class="nav-text">bootloader:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u52A0_u8F7Dkernel_u4E0Einitrd_u529F_u80FD"><span class="nav-number">5.</span> <span class="nav-text">加载kernel与initrd功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#init_u4EE5_u53CA/etc/inittab_u914D_u7F6E_u6587_u4EF6_u4E0Erun_level"><span class="nav-number">6.</span> <span class="nav-text">init以及/etc/inittab配置文件与run level</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
