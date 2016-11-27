@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Somewhere I belong...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-06T03:31:02.000Z</updated>
+  <updated>2016-11-27T13:15:23.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,319 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[90 days compass goal]]></title>
+    <link href="http://yoursite.com/2016/11/27/90-days-compass-goal/"/>
+    <id>http://yoursite.com/2016/11/27/90-days-compass-goal/</id>
+    <published>2016-11-27T10:46:20.000Z</published>
+    <updated>2016-11-27T13:15:23.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="Install_RHEL/Atomic_host_from_ISO"><a href="#Install_RHEL/Atomic_host_from_ISO" class="headerlink" title="Install RHEL/Atomic host from ISO"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-making-usb-media.html" target="_blank" rel="external">Install RHEL/Atomic host from ISO</a></h2><ul>
+<li>making installation USB media<ul>
+<li>Find usb device name by dmsg or something like this.<ul>
+<li>connect usb device and see the dmsg last message.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>login as root</li>
+<li>make sure the usb device is not mounted.<ul>
+<li><code>findmnt /dev/sdb</code>: if no output, it’s not mounted.</li>
+<li>if it’s mounted, use <code>unmount $target_name</code> to unmount.</li>
+</ul>
+</li>
+<li>use dd command to write iso to usb<ul>
+<li><code>dd if=/path/to/image.iso of=/dev/sdb bs=521k</code></li>
+</ul>
+</li>
+<li>Reboot and enter boot menu, then select and use anaconda to install.<a id="more"></a>
+</li>
+</ul>
+<h2 id="Install_Atomic_host_with_qcow2_image"><a href="#Install_Atomic_host_with_qcow2_image" class="headerlink" title="Install Atomic host with qcow2 image."></a><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/#get_started_with_docker_formatted_container_images" target="_blank" rel="external">Install Atomic host with qcow2 image.</a></h2><blockquote>
+<p>All below steps has to be done under <code>/var/lib/libvirt/images</code></p>
+</blockquote>
+<ul>
+<li>use <code>qemu-img</code> command to create a snapshot for the qcow2 file, since after your use, you can’t start another one instance.<ul>
+<li><code>qemu-img create -f qcow2 -o backing_file=oringinal.qcow2 new.qcow2</code></li>
+</ul>
+</li>
+<li><p>create pair of cloud-init files.</p>
+<ul>
+<li><p>meta-data</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">instance-id</span>: <span class="string">Atomic0</span></span><br><span class="line"><span class="attribute">local-hostname</span>: <span class="string">atomic-00</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>user-data</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="id">#cloud-config</span></span><br><span class="line"><span class="tag">password</span>: <span class="tag">atomic</span></span><br><span class="line"><span class="tag">chpasswd</span>: &#123;<span class="attribute">expire</span>: False&#125;</span><br><span class="line"><span class="attribute">ssh_pwauth</span>: True</span><br><span class="line"><span class="attribute">ssh_authorized_keys</span>:</span><br><span class="line">\- ssh-rsa AAA...SDvz user1<span class="variable">@yourdomain</span>.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>package both files to a iso image.</p>
+<ul>
+<li><code>genisoimage -output atomic0-cidata.iso -volid cidata -joliet -rock  user-data meta-data</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Start Atomic host:<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">virt</span><span class="literal">-</span><span class="comment">install</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">import</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">name</span> <span class="comment">Atomic0</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">ram</span> <span class="comment">4096</span>  <span class="literal">-</span><span class="comment">vcpus</span> <span class="comment">2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span> <span class="comment">path=/path/to/image</span><span class="string">.</span><span class="comment">qcow2</span><span class="string">,</span><span class="comment">format=qcow2</span><span class="string">,</span><span class="comment">bus=virtio</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span> <span class="comment">path=/path/to/atomic0</span><span class="literal">-</span><span class="comment">cidata</span><span class="string">.</span><span class="comment">iso</span><span class="string">,</span><span class="comment">device=cdrom</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">network</span> <span class="comment">bridge=yourbridge</span> <span class="literal">-</span><span class="comment">graphic</span> <span class="comment">vnc</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="subscription-manager"><a href="#subscription-manager" class="headerlink" title="subscription-manager"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Subscription_Management/1/html/RHSM/index.html" target="_blank" rel="external">subscription-manager</a></h2><ul>
+<li><strong>register and auto attach</strong><br><code>subscription-manager register --username &lt;username&gt; --password &lt;password&gt; --auto-attach</code></li>
+<li>after add or change attached suscription, you have to run:<br><code>subscription-manager refresh</code></li>
+<li>auto-attach:<br><code>subscription-manager attach --auto</code></li>
+<li>attach a specific pool:<br><code>subscription-manager attach --pool=&lt;pool_id&gt;</code></li>
+<li><strong>view all available pools and subscriptions:</strong><br><code>subscription-manager list --available --all</code></li>
+<li>check all the installed subscription:<br><code>subscription-manager list</code></li>
+<li><strong>see repos info:</strong><br><code>subscription-manager repos --list</code></li>
+<li><strong>enable a repo</strong>:<br><code>subscription-manager repos --enable xxxxxxx</code></li>
+</ul>
+<h2 id="yum"><a href="#yum" class="headerlink" title="yum"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/ch-yum.html" target="_blank" rel="external">yum</a></h2><ul>
+<li>check update:<br><code>yum check-update</code></li>
+<li>update a package:<br><code>yum update package_name</code></li>
+<li>search packages:<br><code>yum search vim emac</code></li>
+<li>list all the packages<br><code>yum list all</code></li>
+<li>list all installed packages<br><code>yum list installed</code></li>
+<li>list enabled repos:<br><code>yum repolist</code></li>
+<li>list all the repos:<br><code>yum repolist all</code></li>
+</ul>
+<h2 id="adding_channels_and_installing_optional_rpms_2C_and_review_what_is_in_rhel-7-server-extras-rpms"><a href="#adding_channels_and_installing_optional_rpms_2C_and_review_what_is_in_rhel-7-server-extras-rpms" class="headerlink" title="adding channels and installing optional rpms, and review what is in rhel-7-server-extras-rpms"></a>adding channels and installing optional rpms, and review what is in <code>rhel-7-server-extras-rpms</code></h2><ul>
+<li>Adding channels/repos:<br><code>subscription-manager repos --enable xxxxxxx</code></li>
+<li>installing optional rpms:<br><code>yum install xxxxxx</code></li>
+<li>reviewing what is in <code>rhel-7-server-extras-rpms</code>:<br><code>yum list all | grep -i rhel-7-server-extras-rpms</code><ul>
+<li>total: 64</li>
+<li>docker related: 17</li>
+<li>cockpit related: 9</li>
+<li>python related: 13</li>
+</ul>
+</li>
+</ul>
+<h2 id="Atomic_host_manageability"><a href="#Atomic_host_manageability" class="headerlink" title="Atomic host manageability"></a><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/paged/getting-started-guide/chapter-1-installing-rhel-atomic-host" target="_blank" rel="external">Atomic host manageability</a></h2><ul>
+<li>upgrade:<br><code>sudo atomic host upgrade</code><br><code>sudo systemctl reboot</code></li>
+<li>rollback:<br><code>sudo atomic host rollback</code><br><code>sudo systemctl reboot</code></li>
+<li>check which version is running:<br><code>sudo atomic host status</code></li>
+</ul>
+<h2 id="what_other_cloud_images_and_what_3rd-party_hypervisor_it_runs_on"><a href="#what_other_cloud_images_and_what_3rd-party_hypervisor_it_runs_on" class="headerlink" title="what other cloud images and what 3rd-party hypervisor it runs on"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-atomic-virtualization.html" target="_blank" rel="external">what other cloud images and what 3rd-party hypervisor it runs on</a></h2><ul>
+<li>Atomic Host can run on RHEV/RHEL OpenStack/VMware/Microsoft Hyper-V etc. hypervisor.</li>
+<li>Atomic Host cloud images include OVA and QCOW2 formats.</li>
+</ul>
+<h2 id="Docker_3A"><a href="#Docker_3A" class="headerlink" title="Docker:"></a>Docker:</h2><h3 id="Basic_tutorial"><a href="#Basic_tutorial" class="headerlink" title="Basic tutorial"></a><a href="https://docs.docker.com/engine/getstarted/step_one/" target="_blank" rel="external">Basic tutorial</a></h3><ul>
+<li>run the docker hub image<br><code>docker run docker/whalesay cowsay boo</code></li>
+<li>build image from Dockerfile<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">FROM</span> docker/whalesay:latest</span><br><span class="line"><span class="built_in">RUN</span> <span class="bash">apt-get -y update &amp;&amp; apt-get install -y fortunes</span><br><span class="line"></span><span class="built_in">CMD</span> <span class="bash">/usr/games/fortune <span class="operator">-a</span> | cowsay</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>after this, you will see the images built by <code>docker image</code></p>
+<ul>
+<li>tag and push image to docker hub.<br><code>docker tag image_id dockerhub_name/docker-whale:latest</code><br><code>docker login --username=hubusername --email=youremail@company.com</code><br><code>docker push dockerhub_name/docker-whale</code></li>
+</ul>
+<h3 id="Run_hello_world_in_a_container"><a href="#Run_hello_world_in_a_container" class="headerlink" title="Run hello world in a container"></a><a href="https://docs.docker.com/engine/tutorials/dockerizing/" target="_blank" rel="external">Run hello world in a container</a></h3><ul>
+<li>Run a hello world container.<br><code>docker run ubuntu /bin/echo &#39;Hello World&#39;</code></li>
+<li>Run a interactive container.<br><code>docker run -t -i ubuntu /bin/bash</code><br><code>-t</code>: open a terminal.<br><code>-i</code>: grab the standard input.</li>
+<li>Start a deamonized hello world.<br><code>docker run -d /bin/sh -c &quot;while true; do echo hello world; sleep 1; done&quot;</code></li>
+<li>see docker deamon’s info<br><code>docker ps</code>: container id and name will show</li>
+<li>see output of docker deamon:<br><code>docker logs container_id/container_name</code></li>
+<li>stop a detached container:<br><code>docker stop container_id/container_name</code></li>
+</ul>
+<h3 id="Run_a_simple_application"><a href="#Run_a_simple_application" class="headerlink" title="Run a simple application"></a><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-guide/#get_started_with_containers" target="_blank" rel="external">Run a simple application</a></h3><h4 id="1_29_Apache_web_server"><a href="#1_29_Apache_web_server" class="headerlink" title="1) Apache web server"></a>1) Apache web server</h4><ul>
+<li><code>docker pull rhel7:latest</code></li>
+<li>get <code>action</code> and <code>Dockerfile</code></li>
+<li>modify both files as your need</li>
+<li><code>docker build -t webwithdb .</code></li>
+<li><code>docker run -d -p 80 --name=mywebwithdb webwithdb</code></li>
+<li>mount from local host, use <code>-v</code> option:<br><code>docker run -d -p 80 -v /var/www/html:/var/www/html --name mywebwithdb webwithdb</code></li>
+</ul>
+<h4 id="2_29_mariadb_container"><a href="#2_29_mariadb_container" class="headerlink" title="2) mariadb container"></a>2) mariadb container</h4><ul>
+<li><code>docker pull rhel7:latest</code></li>
+<li>get <code>gss_db.sql</code> and <code>Dockerfile</code></li>
+<li>modify Dockerfile for your need</li>
+<li><code>docker build -t dbforweb .</code></li>
+<li><code>docker run -d -p 3306:3306 --name=mydbforweb dbforweb</code></li>
+</ul>
+<h3 id="docs_in_custom_portal"><a href="#docs_in_custom_portal" class="headerlink" title="docs in custom portal"></a><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/#introduction_to_linux_containers" target="_blank" rel="external">docs in custom portal</a></h3><h4 id="docker_pull_3A"><a href="#docker_pull_3A" class="headerlink" title="docker pull:"></a>docker pull:</h4><p><code>docker pull &lt;registry&gt;[:&lt;port&gt;]/[&lt;namespace&gt;/]&lt;name&gt;:&lt;tag&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Namespaces</th>
+<th style="text-align:right">Examples(<code>&lt;namespace&gt;/&lt;name&gt;</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">organization</td>
+<td style="text-align:right">redhat/kubernetes, google/kubernetes</td>
+</tr>
+<tr>
+<td style="text-align:left">login (user name)</td>
+<td style="text-align:right">alice/application, bob/application</td>
+</tr>
+<tr>
+<td style="text-align:left">role</td>
+<td style="text-align:right">devel/database, test/database, prod/database</td>
+</tr>
+</tbody>
+</table>
+<h4 id="inspect_images_3A"><a href="#inspect_images_3A" class="headerlink" title="inspect images:"></a>inspect images:</h4><p><code>docker inspect image_name</code></p>
+<h4 id="mount_an_image_3A"><a href="#mount_an_image_3A" class="headerlink" title="mount an image:"></a>mount an image:</h4><p><code>atomic mount image_name /mnt</code></p>
+<h4 id="check_images_installed_in_the_container"><a href="#check_images_installed_in_the_container" class="headerlink" title="check images installed in the container"></a>check images installed in the container</h4><p><code>rpm -qa --root /mnt | less</code></p>
+<h4 id="unmount_the_image_3A"><a href="#unmount_the_image_3A" class="headerlink" title="unmount the image:"></a>unmount the image:</h4><p><code>atomic unmount /mnt</code></p>
+<h4 id="scan_images_can_also_use_3A"><a href="#scan_images_can_also_use_3A" class="headerlink" title="scan images can also use:"></a>scan images can also use:</h4><p><code>atomic scan image_name</code></p>
+<h4 id="when_run_a_docker_run_command_3A"><a href="#when_run_a_docker_run_command_3A" class="headerlink" title="when run a docker run command:"></a>when run a <code>docker run</code> command:</h4><ul>
+<li>the file system provided by the docker image</li>
+<li>a new process table from inside the container(no process can be seen from the host can be seen)</li>
+<li>new network interface(by default, a separate docker network interface provides a private IP address to each container via DHCP)</li>
+</ul>
+<h4 id="run_a_binary_which_doesn_u2019t_exist_in_container_but_in_host_3A"><a href="#run_a_binary_which_doesn_u2019t_exist_in_container_but_in_host_3A" class="headerlink" title="run a binary which doesn’t exist in container but in host:"></a>run a binary which doesn’t exist in container but in host:</h4><p><code>docker run -v /usr/sbin:/usr/sbin --rm rhel7 /usr/sbin/ip addr show eth0</code><br><code>-v</code>: mount host working directory to container<br><code>--rm</code>: after running this container, it’s stopped and removed.</p>
+<h4 id="if_the_container_wants_to_be_kept_around_and_used_again_2C_assign_a_name_to_it"><a href="#if_the_container_wants_to_be_kept_around_and_used_again_2C_assign_a_name_to_it" class="headerlink" title="if the container wants to be kept around and used again, assign a name to it."></a>if the container wants to be kept around and used again, assign a name to it.</h4><p><code>docker run -v /usr/sbin:/usr/sbin --name=mytest rhel /usr/sbin/ip addr show eth0</code><br>start the container again: <code>-i</code> is necessary<br><code>docker start -i mytest</code><br>start a container interactive <code>-a</code> is mandatory.(to attach the sdout/sderr)</p>
+<h4 id="view_docker_file_name_in_a_container_28redhat_registry_29_3A"><a href="#view_docker_file_name_in_a_container_28redhat_registry_29_3A" class="headerlink" title="view docker file name in a container(redhat registry):"></a>view docker file name in a container(redhat registry):</h4><p><code>docker run --rm rhel7 ls /root/buildinfo</code></p>
+<h4 id="check_the_content_in_Dockerfile_3A"><a href="#check_the_content_in_Dockerfile_3A" class="headerlink" title="check the content in Dockerfile:"></a>check the content in Dockerfile:</h4><p><code>docker run --rm rhel cat /root/buildinfo/docker_file_name</code></p>
+<h4 id="bind_mounting_log_files_3A"><a href="#bind_mounting_log_files_3A" class="headerlink" title="bind mounting log files:"></a>bind mounting log files:</h4><p><code>docker run -v /dev/log:/dev/log --rm rhel7 logger &quot;Testing logging to the host&quot;</code></p>
+<h4 id="pull_out_particular_info_from_a_container_3A"><a href="#pull_out_particular_info_from_a_container_3A" class="headerlink" title="pull out particular info from a container:"></a>pull out particular info from a container:</h4><p><code>docker inspect --format=&#39;.NetworkSettings.IPAddress&#39; mytest</code></p>
+<ul>
+<li>command run with the container: <code>.Path</code></li>
+<li>arguments with the container:<code>.Args</code></li>
+<li>TCP/UDP ports exposed from container:<code>.Config.ExposedPorts</code></li>
+<li>process id of the container:<code>.State.Pid</code></li>
+<li>port mapping from container to host:<code>.HostConfig.PortBindings</code></li>
+</ul>
+<h4 id="investigating_within_a_running_docker_container"><a href="#investigating_within_a_running_docker_container" class="headerlink" title="investigating within a running docker container"></a>investigating within a running docker container</h4><ul>
+<li><code>docker ps</code> to get the running container name</li>
+<li><code>docker exec -it con_name /bin/bash</code></li>
+</ul>
+<h4 id="docker_stop_container_name/id"><a href="#docker_stop_container_name/id" class="headerlink" title="docker stop container_name/id"></a><code>docker stop container_name/id</code></h4><ul>
+<li><strong>stop</strong> option sends a SIGTERM signal to terminate the container. if container doesn’t stop then after 10s, docker sends a SIGKILL signal.</li>
+<li>send other signal:<br><code>docker kill --signal=&quot;SIGNUP&quot; con_id/name</code></li>
+</ul>
+<h4 id="remove_containers_3A"><a href="#remove_containers_3A" class="headerlink" title="remove containers:"></a>remove containers:</h4><ul>
+<li><code>docker rm con_id/name</code></li>
+<li><code>docker rm con1 con2 con3</code></li>
+<li>rm all the containers:<br>  <code>docker rm $(docker ps -a -q)</code></li>
+</ul>
+<h4 id="creating_a_image_from_a_container"><a href="#creating_a_image_from_a_container" class="headerlink" title="creating a image from a container"></a>creating a image from a container</h4><ul>
+<li><code>docker run -i rhel:latest /bin/bash -c &quot;yum ....&quot;</code></li>
+<li><code>docker ps -l</code> to get latest container id</li>
+<li><code>docker commit -m &quot;xxxxx&quot; -a &quot;author name&quot; con_id new_name</code></li>
+</ul>
+<h4 id="docker_tag"><a href="#docker_tag" class="headerlink" title="docker tag"></a>docker tag</h4><ul>
+<li>format: <code>registryhost/username/NAME:tag</code></li>
+<li>can use just the username or with tag name or all of them</li>
+</ul>
+<h4 id="save_docker_image_as_tarball"><a href="#save_docker_image_as_tarball" class="headerlink" title="save docker image as tarball"></a>save docker image as tarball</h4><p><code>docker save -o myrhel7.tar myrhel7:latest</code></p>
+<h4 id="reuse_saved_docker_image"><a href="#reuse_saved_docker_image" class="headerlink" title="reuse saved docker image"></a>reuse saved docker image</h4><p><code>cat myrhel7.tar | docker import - cnegus/myrhel7</code></p>
+<h4 id="remove_docker_images"><a href="#remove_docker_images" class="headerlink" title="remove docker images"></a>remove docker images</h4><ul>
+<li><code>docker rmi img_name</code></li>
+<li><code>docker rmi img1 img2 img3</code></li>
+<li><code>docker rmi $(docker images -a -q)</code></li>
+</ul>
+<h4 id="private_docker_registry_28with_firewall_29_3A"><a href="#private_docker_registry_28with_firewall_29_3A" class="headerlink" title="private docker registry(with firewall):"></a>private docker registry(with firewall):</h4><ul>
+<li>start your registry:<br>  <code>docker run -d -p 5000:5000 --name registry registry:2</code></li>
+<li>pull some image from hub:<br>  <code>docker pull ubuntu</code></li>
+<li>tag the image to point to your registry:<br>  <code>docker tag ubuntu localhost:5000/myfirstimage</code></li>
+<li>push it<br>  <code>docker push localhost:5000/myfirstimage</code></li>
+<li>pull it<br>  <code>docker pull localhost:5000/myfirstimage</code></li>
+<li>stop your registry and remove all data<br>  <code>docker stop registry &amp;&amp; docker rm -v registry</code></li>
+</ul>
+<h4 id="private_docker_registry_3A"><a href="#private_docker_registry_3A" class="headerlink" title="private docker registry:"></a>private docker registry:</h4><ul>
+<li>install docker-distribution:<br>  <code>yum install -y docker-distribution</code></li>
+<li>enable and start docker-distribution:<br>  <code>systemctl enable docker-distribution
+  systemctl start docker-distribution
+  systemctl status docker-distribution</code></li>
+<li>figure out firewall isuue:<br>  <code>firewall-cmd --zone=public --add-port=5000/tcp
+firewall-cmd --zone=public --add-port=5000/tcp --permanent
+firewall-cmd --zone=public --list-ports
+5000/tcp</code></li>
+<li>if using iptables firewall, run follow at each boot:<br> <code>iptables -A INPUT -m state --state NEW -m tcp -p tcp --dport 5000 -j ACCEPT</code></li>
+</ul>
+<h4 id="managing_storage_with_docker_formatted_containers"><a href="#managing_storage_with_docker_formatted_containers" class="headerlink" title="managing storage with docker formatted containers"></a>managing storage with docker formatted containers</h4><h5 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h5><ul>
+<li>default installation of rhel use <code>loopback</code> devices</li>
+<li>rhel atomic host has <code>LVM thin pools</code> created during installation.</li>
+<li>make sure following things in planning phase:<ol>
+<li>you are running <code>direct-lvm</code> and have <code>LVM thin pools</code> set up. this can be done using <code>docker-storage-setup</code> utility.</li>
+<li>allocate enough free space during installation or plan for an external storage to be attached to the system.</li>
+</ol>
+</li>
+</ul>
+<h5 id="using_docker-storage-setup"><a href="#using_docker-storage-setup" class="headerlink" title="using docker-storage-setup"></a>using <code>docker-storage-setup</code></h5><p>1.overview</p>
+<ul>
+<li><code>docker-storage-setup</code> is installed with docker package</li>
+<li>when docker starts, <code>docker-storage-setup</code> is automatically started.</li>
+<li>it tries to find free space in volumn group containing the root logical volumn and tries to setup a lvm thin pool.</li>
+<li>it’s controlled by config file <code>/usr/lib/docker-storage-setup/docker-storage-setup</code>.</li>
+<li>override the options in the above config file by creating <code>/etc/sysconfig/docker-storage-setup</code></li>
+</ul>
+<p>2.volume group containing the root volume</p>
+<ul>
+<li>if you leave free space during system installation in the root volume group, starting docker will automatically set up a thin pool and use it.</li>
+</ul>
+<p>3.lvm thin pool in a user specified volume group<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> VG=docker-vg &gt;&gt; /etc/sysconfig/docker-storage-setup</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<p>4.setting up a volume group and lvm thin pool on user specified block device<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> DEVS=/dev/vdb &gt;&gt; /etc/sysconfig/docker-storage-setup</span><br><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure></p>
+<h4 id="manage_storage_in_atomic_host"><a href="#manage_storage_in_atomic_host" class="headerlink" title="manage storage in atomic host"></a>manage storage in atomic host</h4><ul>
+<li>on rhel atomic host, the root volume is 3GB, and there’s free space in root volume <strong>group</strong>, and 60% in the rest space is used for creating lvm thin pool<strong>(docker-pool)</strong>  by <code>docker-storage-setup</code>.</li>
+<li>the rest(40%) of space is free too, and can be used for extending the root volume or for creating a thin pool.</li>
+<li><code>lvs</code> command to list the logical volumes on the system and the names.(<em>root</em>, <em>docker-pool</em>)</li>
+<li><code>root</code> partition:<ul>
+<li>3GB by default</li>
+<li><code>/var</code> and <code>/etc</code> directories</li>
+<li><code>/ostree/repo</code> which contains os tree versions</li>
+<li><code>/var/lib/docker</code> contains temporary data or docker volumes.</li>
+</ul>
+</li>
+<li><code>docker-pool</code>: store container images.</li>
+<li>if docker-pool is out of space, docker-storage-setup will automatically find free space in the volume group and extend.<ul>
+<li><code>/etc/sysconfig/docker</code>: configured by user</li>
+<li><code>/etc/sysconfig/docker-storage</code>: configured by programs, but also can be edited by user(have to disable docker-storage-setup)</li>
+<li><code>/etc/sysconfig/docker-storage-setup</code>: configured by user, only exists in atomic host.</li>
+</ul>
+</li>
+<li><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/#changing_the_default_size_of_the_root_partition_during_installation" target="_blank" rel="external">change root partition during installation</a></li>
+<li>change the root partition after installation<br>  adding container images to <code>docker-pool</code> needs space in <code>/var/lib/docker</code>. for database server, image requests a <code>docker-volume</code> when it has data, which shouldn’t store in the container.<ul>
+<li>use free space in volume group:<br>  <code>lvextend -r -L +3GB /dev/atomicos/root</code> </li>
+<li>add additional storage to host to extend(<strong>SAFE</strong>):<br>  <code>systemctl stop docker docker-storage-setup</code><br>  <code>pvcreate /dev/sdb</code><br>  <code>vgextend atomicos /dev/sdb</code><br>  <code>lvextend -r -L +3GB /dev/atomicos/root</code><br>  <code>systemctl start docker docker-storage-setup</code></li>
+<li>extend without adding more storage(destructive):<br>  <code>systemctl stop docker docker-storage-setup</code><br>  <code>rm -rf /var/lib/docker/\*</code><br>  <code>lvremove atomicos/docker-pool</code><br>  <code>lvextend -L +3GB /dev/atomicos/root</code><br>  <code>systemctl start docker-storage-setup</code><br>  <code>systemctt start docker</code></li>
+</ul>
+</li>
+<li>if docker conf files are changed:<br>  <code>systemctl stop docker docker-storage-setup</code><br>  <code>rm /etc/sysconfig/docker-storage-setup</code><br>  <code>lvremove docker/docker-pool</code><br>  <code>rm -rf /var/lib/docker/</code><br>  <code>systemctl start docker</code></li>
+<li><a href="https://access.redhat.com/documentation/en/red-hat-enterprise-linux-atomic-host/7/single/getting-started-with-containers/#overlay_graph_driver" target="_blank" rel="external">overlay fs</a>:<br>  more efficient and perfromant and less memory comparing to lvm thin pool, but can’t support selinux.</li>
+<li>increasing the base device size(can’t reduce):<br>  <code>docker daemon --storage-opt --dm.basesize=20GB</code><ul>
+<li>after and include docker 1.10, docker base device size is 10.74GB</li>
+<li>before 1.10, it’s 107.4GB</li>
+</ul>
+</li>
+</ul>
+<h4 id="starting_a_container_using_systemd"><a href="#starting_a_container_using_systemd" class="headerlink" title="starting a container using systemd"></a>starting a container using systemd</h4><p>create file <code>/etc/systemd/system/redis-container.service</code><br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[Unit]</span></span><br><span class="line"><span class="setting">Description=<span class="value">Redis container</span></span></span><br><span class="line"><span class="setting">Author=<span class="value">Me</span></span></span><br><span class="line"><span class="setting">After=<span class="value">docker.service</span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[Service]</span></span><br><span class="line"><span class="setting">Restart=<span class="value">always</span></span></span><br><span class="line"><span class="setting">ExecStart=<span class="value">/usr/bin/docker start -a redis_server</span></span></span><br><span class="line"><span class="setting">ExecStop=<span class="value">/usr/bin/docker stop -t <span class="number">2</span> redis_server</span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[Install]</span></span><br><span class="line"><span class="setting">WantedBy=<span class="value">local.target</span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="running_super-privileged_containers"><a href="#running_super-privileged_containers" class="headerlink" title="running super-privileged containers"></a>running super-privileged containers</h4><p>super-privileged containers are intended to access, monitor, and possibly change features on the host.<br>atomic command:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">atomic <span class="command">run</span> rhel7/rhel-tools</span><br></pre></td></tr></table></figure></p>
+<p>equals:<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span> -it --name rhel-tools --privileged                       \</span><br><span class="line">      --ipc=host --<span class="keyword">net</span>=host --pid=host -<span class="keyword">e</span> HOST=/host                \</span><br><span class="line">      -<span class="keyword">e</span> NAME=rhel-tools -<span class="keyword">e</span> IMAGE=rhel7/rhel-tools                  \</span><br><span class="line">      -v /<span class="keyword">run</span>:/<span class="keyword">run</span> -v /<span class="keyword">var</span>/<span class="keyword">log</span>:/<span class="keyword">var</span>/<span class="keyword">log</span>                             \</span><br><span class="line">      -v /etc/localtime:/etc/localtime -v /:/host rhel7/rhel-tools</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>privileged containers run applications as root user in host.</li>
+<li><code>df</code> and <code>mount</code> will see different info from running them directly from host. since they maintain their own mount table.</li>
+<li><code>ps -e</code> can see every process on the host, and can kill them.</li>
+</ul>
+<h4 id="atomic_tools_container_3A"><a href="#atomic_tools_container_3A" class="headerlink" title="atomic tools container:"></a>atomic tools container:</h4><p><code>yum</code> can’t be used in atomic, since atomic is designed to be light-weight.<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull rhel7/rhel-tools</span><br><span class="line">atomic <span class="command">run</span> rhel7/rhel-tools</span><br></pre></td></tr></table></figure></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="Install_RHEL/Atomic_host_from_ISO"><a href="#Install_RHEL/Atomic_host_from_ISO" class="headerlink" title="Install RHEL/Atomic host from ISO"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-making-usb-media.html">Install RHEL/Atomic host from ISO</a></h2><ul>
+<li>making installation USB media<ul>
+<li>Find usb device name by dmsg or something like this.<ul>
+<li>connect usb device and see the dmsg last message.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>login as root</li>
+<li>make sure the usb device is not mounted.<ul>
+<li><code>findmnt /dev/sdb</code>: if no output, it’s not mounted.</li>
+<li>if it’s mounted, use <code>unmount $target_name</code> to unmount.</li>
+</ul>
+</li>
+<li>use dd command to write iso to usb<ul>
+<li><code>dd if=/path/to/image.iso of=/dev/sdb bs=521k</code></li>
+</ul>
+</li>
+<li>Reboot and enter boot menu, then select and use anaconda to install.]]>
+    
+    </summary>
+    
+      <category term="redhat" scheme="http://yoursite.com/tags/redhat/"/>
+    
+      <category term="linux os" scheme="http://yoursite.com/categories/linux-os/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Linux学习笔记(boot)]]></title>

@@ -262,6 +262,127 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/27/90-days-compass-goal/" itemprop="url">
+                  90 days compass goal
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-11-27T18:46:20+08:00" content="2016-11-27">
+              2016-11-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux-os/" itemprop="url" rel="index">
+                    <span itemprop="name">linux os</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/27/90-days-compass-goal/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/90-days-compass-goal/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="Install_RHEL/Atomic_host_from_ISO"><a href="#Install_RHEL/Atomic_host_from_ISO" class="headerlink" title="Install RHEL/Atomic host from ISO"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-making-usb-media.html">Install RHEL/Atomic host from ISO</a></h2><ul>
+<li>making installation USB media<ul>
+<li>Find usb device name by dmsg or something like this.<ul>
+<li>connect usb device and see the dmsg last message.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>login as root</li>
+<li>make sure the usb device is not mounted.<ul>
+<li><code>findmnt /dev/sdb</code>: if no output, it’s not mounted.</li>
+<li>if it’s mounted, use <code>unmount $target_name</code> to unmount.</li>
+</ul>
+</li>
+<li>use dd command to write iso to usb<ul>
+<li><code>dd if=/path/to/image.iso of=/dev/sdb bs=521k</code></li>
+</ul>
+</li>
+<li>Reboot and enter boot menu, then select and use anaconda to install.
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/27/90-days-compass-goal/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/06/Linux学习笔记-boot/" itemprop="url">
                   Linux学习笔记(boot)
                 </a>
@@ -724,113 +845,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/02/我的vim配置/" itemprop="url">
-                  我的vim配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-02T14:25:54+08:00" content="2016-01-02">
-              2016-01-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/to-be-a-geek/" itemprop="url" rel="index">
-                    <span itemprop="name">to be a geek</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/02/我的vim配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/02/我的vim配置/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>主要是适配python开发. 都是些github star超高之作.</p>
-</blockquote>
-<h3 id="u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A"><a href="#u9996_u5148_2C_u7528vundle_u6765_u7BA1_u7406_u63D2_u4EF6_3A" class="headerlink" title="首先,用vundle来管理插件:"></a>首先,用vundle来管理插件:</h3><p><strong> github stars: 10,272 </strong><br> 地址: <a href="https://github.com/VundleVim/Vundle.vim">github/vundle</a></p>
-<h3 id="u6211_u7684vundle_list_3A"><a href="#u6211_u7684vundle_list_3A" class="headerlink" title="我的vundle list:"></a>我的vundle list:</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">" The following are examples of different formats supported.</span><br><span class="line"> " Keep Plugin commands between vundle#<span class="operator"><span class="keyword">begin</span>/<span class="keyword">end</span>.</span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Valloric/YouCompleteMe'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'tmhedberg/SimpylFold'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/syntastic'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'nvie/vim-flake8'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'altercation/vim-colors-solarized'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'scrooloose/nerdtree'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'jistr/vim-nerdtree-tabs'</span></span><br><span class="line"> <span class="keyword">Plugin</span> <span class="string">'Lokaltog/powerline'</span>, &#123;<span class="string">'rtp'</span>: <span class="string">'powerline/bindings/vim/'</span>&#125;</span></span><br></pre></td></tr></table></figure>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/02/我的vim配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -877,7 +891,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -891,7 +905,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>
