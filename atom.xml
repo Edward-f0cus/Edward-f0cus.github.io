@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Somewhere I belong...]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-27T13:15:23.000Z</updated>
+  <updated>2016-11-27T16:38:12.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,11 +15,132 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[rsyslog presentation]]></title>
+    <link href="http://yoursite.com/2016/11/28/rsyslog-presentation/"/>
+    <id>http://yoursite.com/2016/11/28/rsyslog-presentation/</id>
+    <published>2016-11-27T16:29:19.000Z</published>
+    <updated>2016-11-27T16:38:12.000Z</updated>
+    <content type="html"><![CDATA[<h2 id="rsyslog_message_flow"><a href="#rsyslog_message_flow" class="headerlink" title="rsyslog message flow"></a>rsyslog message flow</h2><p><strong>message enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an action, which then does something to the message, e.g. write it to a file or a database, or forward it to a remote host.</strong><br><a id="more"></a></p>
+<h2 id="rsyslog_overview"><a href="#rsyslog_overview" class="headerlink" title="rsyslog overview"></a>rsyslog overview</h2><ul>
+<li>all the features supported: <a href="http://www.rsyslog.com/doc/master/features.html" target="_blank" rel="external">http://www.rsyslog.com/doc/master/features.html</a></li>
+<li>rsyslog defaults to using <strong>TCP</strong> on port 514, while syslog uses udp and 514.</li>
+<li><code>/var/log</code> persistently store the process and kenel log</li>
+<li><code>system-journald</code> collects:<ul>
+<li>messages from kernel</li>
+<li>early stage of the boot process</li>
+<li>standard output and error of daemons</li>
+<li>syslog</li>
+</ul>
+</li>
+<li><code>rsyslog</code> service:<ul>
+<li>sorts syslog messages by type and priority. </li>
+<li>write them to <code>/var/log</code></li>
+<li>most syslogs are stored in <code>/var/log/messages</code></li>
+<li><code>cat /etc/rsyslog.conf</code> can show all the facilities.</li>
+<li>config files locates in <code>/etc/rsyslog.conf</code> and <code>/etc/rsyslog.d/*.conf</code></li>
+</ul>
+</li>
+<li><code>logrotate</code> is to rotate <code>/var/log/messages</code> to <code>/var/log/messages-20160920</code><ul>
+<li>after 4 weeks, old log file is discarded to free disk space.</li>
+<li>cron jobs are run daily to check if there’s log to discard</li>
+<li>most log files are rotated weekly</li>
+</ul>
+</li>
+<li><code>logger</code>: <strong>useful to test changes to <code>rsyslog</code> configuration.</strong><ul>
+<li><code>logger -p local7.notice &quot;Log entry created on serverX&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="how_to_config_in_/etc/rsyslog-conf"><a href="#how_to_config_in_/etc/rsyslog-conf" class="headerlink" title="how to config in /etc/rsyslog.conf"></a>how to config in <code>/etc/rsyslog.conf</code></h2><h3 id="Filters"><a href="#Filters" class="headerlink" title="Filters"></a>Filters</h3><h4 id="facility/priority-based_filters"><a href="#facility/priority-based_filters" class="headerlink" title="facility/priority-based filters"></a>facility/priority-based filters</h4><p><code>FACILITY.PRIORITY</code><br><strong>FACILITY</strong>: kern (0), user (1), mail (2), daemon (3), auth (4), syslog (5), lpr (6), news (7), uucp (8), cron (9), authpriv (10), ftp (11), and local0 through local7 (16 - 23).<br><strong>PRIORITY</strong>: debug (7), info (6), notice (5), warning (4), err (3), crit (2), alert (1), and emerg (0).<br><strong>EXAMPLE</strong>:</p>
+<ul>
+<li><code>kern.*</code></li>
+<li><code>mail.crit</code></li>
+<li><code>cron.!info,!debug</code><h4 id="property-based_filters"><a href="#property-based_filters" class="headerlink" title="property-based filters"></a>property-based filters</h4><strong>syntax</strong>:<code>:PROPERTY, [!]COMPARE_OPERATION, &quot;STRING&quot;</code><br><code>PROPERTIES</code>: fetch from <code>man rsyslog.conf</code>, under <em>Available properties</em>.<br><code>COMPARE_OPERATION</code>: <em>contains, isequal, startswith, regex, ereregex, isempty</em><br><strong>EXAMPLE</strong>:</li>
+<li><code>:msg, contains, &quot;error&quot;</code></li>
+<li><code>:hostname, isequal, &quot;host1&quot;</code></li>
+<li><code>:msg, !regex, &quot;fatal .* error&quot;</code><h4 id="expression-based_filters"><a href="#expression-based_filters" class="headerlink" title="expression-based filters"></a>expression-based filters</h4><strong>syntax</strong>: <code>if EXPRESSION then ACTION else ACTION</code><br><strong>EXAMPLE</strong>:<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable">$programname</span> == <span class="string">'prog1'</span> <span class="keyword">then</span> &#123;</span><br><span class="line">	   action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1.log"</span>)</span><br><span class="line">   if <span class="variable">$msg</span> contains <span class="string">'test'</span> then</span><br><span class="line">	   action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1test.log"</span>)</span><br><span class="line">   else</span><br><span class="line">     action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1notest.log"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="RainerScript"><a href="#RainerScript" class="headerlink" title="RainerScript"></a>RainerScript</h4><p><strong>complex filter, use rsyslog’s own script language, called rainerscript</strong><br>HOW TO USE rainerscript(official doc):<br><a href="http://www.rsyslog.com/doc/rainerscript.html" target="_blank" rel="external">http://www.rsyslog.com/doc/rainerscript.html</a><br><strong>can use <code>set</code> and <code>unset</code> to define and delete user defined variable.</strong> </p>
+<h4 id="ACTION"><a href="#ACTION" class="headerlink" title="ACTION"></a>ACTION</h4><h5 id="saving_syslog_messages_to_log_files"><a href="#saving_syslog_messages_to_log_files" class="headerlink" title="saving syslog messages to log files"></a>saving syslog messages to log files</h5><p><code>FILTER PATH</code><br>examples: <code>cron.* /var/log/cron.log</code><br><code>FILTER -PATH</code><br>by default, rsyslog sync logs everytime after a syslog message is generated. use <code>-</code> to omit syncing.<br>can improve performance when programs run very verbose log messages.<br><code>FILTER ?DynamicFile</code><br><em>DynamicFile</em>: a name of defined template that modify output paths, can use <code>-</code> to disable syncing.<br>if it’s set as <code>/dev/console</code>, syslog messages can be printed on standard output.</p>
+<h5 id="sending_syslog_messages_over_network"><a href="#sending_syslog_messages_over_network" class="headerlink" title="sending syslog messages over network"></a>sending syslog messages over network</h5><p><code>@[(zNUMBER)]HOST:[PORT]</code><br><code>@</code>: use UDP protocol<br><code>@@</code>: use TCP protocol<br><code>zNUMBER</code>: <code>z</code> means using zlib to compress the syslog messages. <code>NUMBER</code> means the compress level(1-9). below 90 bytes are never compressed<br><strong>EXAMPLE</strong>:<br><code>*.* @192.168.0.1</code><br><code>*.* @(z9)example.com:6514</code></p>
+<h5 id="can_also_send_syslog_messages_to_specific_user"><a href="#can_also_send_syslog_messages_to_specific_user" class="headerlink" title="can also send syslog messages to specific user"></a>can also send syslog messages to specific user</h5><h5 id="executing_a_program"><a href="#executing_a_program" class="headerlink" title="executing a program"></a>executing a program</h5><p><code>FILTER ^EXECUTABLE; TEMPLATE</code><br>syslog message filtered by FILTER, formatted withTEMPLATE, are passed as a parameter to EXECUTABLE program. Then it’s executed.</p>
+<h5 id="storing_syslog_messages_in_a_database"><a href="#storing_syslog_messages_in_a_database" class="headerlink" title="storing syslog messages in a database"></a>storing syslog messages in a database</h5><p><code>:PLUGIN:DB_HOST,DB_NAME,DB_USER,DB_PASSWORD;[TEMPLATE]</code><br>currently, rsyslog only supports mysql and postgresql. have to install <em>rsyslog-mysql</em> and <em>rsyslog-pgsql</em> packages. config in <code>/etc/rsyslog.conf</code> to load the module:<br><code>$ModLoad ommysql    # Output module for MySQL support
+$ModLoad ompgsql    # Output module for PostgreSQL support</code></p>
+<h5 id="discard_syslog_messages"><a href="#discard_syslog_messages" class="headerlink" title="discard syslog messages"></a>discard syslog messages</h5><p><code>FILTER ~</code></p>
+<h4 id="specifying_multiple_actions"><a href="#specifying_multiple_actions" class="headerlink" title="specifying multiple actions"></a>specifying multiple actions</h4><p><code>FILTER ACTION
+&amp; ACTION
+&amp; ACTION</code><br><strong>EXAMPLE</strong>:<br><code>kern.=crit user1
+&amp; ^test-program; temp
+&amp; @192.168.0.1</code></p>
+<h4 id="TEMPLATES"><a href="#TEMPLATES" class="headerlink" title="TEMPLATES"></a>TEMPLATES</h4><p><strong>templates definition should always precede rule definition in <code>/etc/rsyslog.conf</code>, or it’ll be ignored.</strong><br>Any output that is generated by rsyslog can be formatted with the use of template.<br><code>template TEMPLATE_NAME,&quot;text %PROPERTY% more text&quot;, [OPTION]</code><br><em>OPTION</em>: currently only <code>sql</code> and <code>stdsql</code> are supported.<br>also provide some predefined templates.<br><strong>EXAMPLE</strong>:<br><code>$template verbose, &quot;%syslogseverity%, %syslogfacility%, %timegenerated%, %HOSTNAME%, %syslogtag%, %msg%\n&quot;</code><br><code>$template dbFormat,&quot;insert into SystemEvents (Message, Facility, FromHost, Priority, DeviceReportedTime, ReceivedAt, InfoUnitID, SysLogTag) values (&#39;%msg%&#39;, %syslogfacility%, &#39;%HOSTNAME%&#39;, %syslogpriority%, &#39;%timereported:::date-mysql%&#39;, &#39;%timegenerated:::date-mysql%&#39;, %iut%, &#39;%syslogtag%&#39;)&quot;, sql</code><br>option <em>sql</em> tells the database writer to format the message as an mysql sql query.</p>
+<p>#####generate dynamic file names:<br><code>$template DynamicFile,&quot;/var/log/test_logs/%timegenerated%-test.log&quot;</code><br><code>*.* ?DynamicFile</code><br><code>?</code> is an action definition to mark the template</p>
+<p>#####PROPERTIES in template follows syntax:<br><code>%PROPERTY_NAME[:FROM_CHAR:TO_CHAR:OPTION]%</code><br>re can be used here too, to set “R” as the “FROM_CHAR”, and set re as the “TO_CHAR”.<br>property options can refer to <code>man rsyslog.conf</code> under property options part.<br><code>%timegenerated:1:10:date-rfc3339%</code>: format the first 10 characters of time stamp as RFC 3999.</p>
+<h5 id="log_rotation_3A_container_does_not_support_yet"><a href="#log_rotation_3A_container_does_not_support_yet" class="headerlink" title="log rotation: container does not support yet"></a>log rotation: container does not support yet</h5><h2 id="rsyslog_image__287-4-7_29"><a href="#rsyslog_image__287-4-7_29" class="headerlink" title="rsyslog image (7.4.7)"></a>rsyslog image (7.4.7)</h2><h4 id="basic_feature_3A"><a href="#basic_feature_3A" class="headerlink" title="basic feature:"></a>basic feature:</h4><ul>
+<li><p>installs from atomic command</p>
+<ul>
+<li><p><code>atomic install rhel7/rsyslog</code></p>
+<ul>
+<li>execute <code>/bin/install.sh</code> in image to make some directory and mount some dirs<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span> --<span class="keyword">rm</span> --privileged -v /:/host -<span class="keyword">e</span> HOST=/host -<span class="keyword">e</span> IMAGE=rhel7/rsyslog -<span class="keyword">e</span> NAME=rsyslog rhel7/rsyslog /bin/install.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>atomic run rhel7/rsyslog</code></p>
+<ul>
+<li>mount some dirs installed in the previous step, and then run the <code>/bin/rsyslog.sh</code> to start rsyslog service<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --privileged --name rsyslog --net=host -v <span class="regexp">/etc/</span>pki<span class="regexp">/rsyslog:/</span>etc<span class="regexp">/pki/</span>rsyslog -v <span class="regexp">/etc/</span>rsyslog.<span class="string">conf:</span><span class="regexp">/etc/</span>rsyslog.conf -v <span class="regexp">/etc/</span>rsyslog.<span class="string">d:</span><span class="regexp">/etc/</span>rsyslog.d -v <span class="regexp">/var/</span><span class="string">log:</span><span class="regexp">/var/</span>log -v <span class="regexp">/var/</span>lib<span class="regexp">/rsyslog:/</span>var<span class="regexp">/lib/</span>rsyslog -v <span class="regexp">/run/</span><span class="string">log:</span><span class="regexp">/run/</span>log -v <span class="regexp">/etc/</span>machine-<span class="string">id:</span><span class="regexp">/etc/</span>machine-id -v <span class="regexp">/etc/</span><span class="string">localtime:</span><span class="regexp">/etc/</span>localtime -e IMAGE=rhel7<span class="regexp">/rsyslog -e NAME=rsyslog --restart=always rhel7/</span>rsyslog <span class="regexp">/bin/</span>rsyslog.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>configure from host: no need to go inside the container</p>
+</li>
+<li>restarting the service after changing configuration:<ul>
+<li><code>docker stop rsyslog</code></li>
+<li><code>docker rm rsyslog</code></li>
+<li><code>atomic run rhel7/rsyslog</code></li>
+</ul>
+</li>
+<li>super privileged container: container has root access to host</li>
+</ul>
+<h4 id="test_simply_3A"><a href="#test_simply_3A" class="headerlink" title="test simply:"></a>test simply:</h4><ul>
+<li><code>docker ps</code> to check whether it’s running or not</li>
+<li><code>tail -f /var/log/messages</code> to monitor the syslogs</li>
+<li>use <code>logger &quot;test info&quot;</code>, then to see the syslogs.</li>
+</ul>
+<h4 id="disable_journald_persistent_logging_3A"><a href="#disable_journald_persistent_logging_3A" class="headerlink" title="disable journald persistent logging:"></a>disable journald persistent logging:</h4><ul>
+<li>why?: if rsyslog is working, no need to use journald logs any more.</li>
+<li>how?: modify <code>/etc/systemd/journald.conf</code>, change <code>Storage=volatile</code>.</li>
+<li>what happened?: journald still works, but store logs to ramdisk. rsyslog can still capture and process the journald logs.</li>
+</ul>
+<h4 id="rsyslog_container_does_not_support_logrotate_yet"><a href="#rsyslog_container_does_not_support_logrotate_yet" class="headerlink" title="rsyslog container does not support logrotate yet"></a><strong>rsyslog container does not support logrotate yet</strong></h4><h4 id="how_to_update_3A"><a href="#how_to_update_3A" class="headerlink" title="how to update:"></a>how to update:</h4><ul>
+<li><code>docker pull rhel7/rsyslog</code></li>
+<li>if there’s a new image downloaded, run below<ul>
+<li><code>docker stop rhel7/rsyslog</code></li>
+<li><code>docker rm rhel7/rsyslog</code></li>
+<li><code>atomic install rhel7/rsyslog</code></li>
+<li><code>atomic run rhel7/rsyslog</code></li>
+</ul>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="rsyslog_message_flow"><a href="#rsyslog_message_flow" class="headerlink" title="rsyslog message flow"></a>rsyslog message flow</h2><p><strong>message enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an action, which then does something to the message, e.g. write it to a file or a database, or forward it to a remote host.</strong><br>]]>
+    
+    </summary>
+    
+      <category term="redhat" scheme="http://yoursite.com/tags/redhat/"/>
+    
+      <category term="linux os" scheme="http://yoursite.com/categories/linux-os/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[90 days compass goal]]></title>
     <link href="http://yoursite.com/2016/11/27/90-days-compass-goal/"/>
     <id>http://yoursite.com/2016/11/27/90-days-compass-goal/</id>
     <published>2016-11-27T10:46:20.000Z</published>
-    <updated>2016-11-27T13:15:23.000Z</updated>
+    <updated>2016-11-27T13:16:29.000Z</updated>
     <content type="html"><![CDATA[<h2 id="Install_RHEL/Atomic_host_from_ISO"><a href="#Install_RHEL/Atomic_host_from_ISO" class="headerlink" title="Install RHEL/Atomic host from ISO"></a><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/sect-making-usb-media.html" target="_blank" rel="external">Install RHEL/Atomic host from ISO</a></h2><ul>
 <li>making installation USB media<ul>
 <li>Find usb device name by dmsg or something like this.<ul>
@@ -332,7 +453,7 @@ firewall-cmd --zone=public --list-ports
     <link href="http://yoursite.com/2016/08/06/Linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-boot/"/>
     <id>http://yoursite.com/2016/08/06/Linux学习笔记-boot/</id>
     <published>2016-08-06T03:20:16.000Z</published>
-    <updated>2016-08-06T03:31:02.000Z</updated>
+    <updated>2016-11-27T13:16:33.000Z</updated>
     <content type="html"><![CDATA[<h5 id="u7B80_u8FF0_3A"><a href="#u7B80_u8FF0_3A" class="headerlink" title="简述:"></a>简述:</h5><ol>
 <li>硬件主动读取BIOS. BIOS会检测硬件并做自我测试.</li>
 <li>BIOS根据配置获取第一个可以启动的装置, 并读取运行第一个气动装置内MBR的boot loader(即grub)</li>
@@ -1180,7 +1301,7 @@ firewall-cmd --zone=public --list-ports
     <link href="http://yoursite.com/2015/02/27/bc-command-in-shell/"/>
     <id>http://yoursite.com/2015/02/27/bc-command-in-shell/</id>
     <published>2015-02-27T04:46:13.000Z</published>
-    <updated>2016-01-25T16:28:38.000Z</updated>
+    <updated>2016-11-27T13:16:31.000Z</updated>
     <content type="html"><![CDATA[<blockquote>
 <p>  昨天在工作中遇到这么一个问题, 在shell中比较浮点数和整数的大小. 原本以为用shell的比较符号(-lt之类的)就可以, 没想到一试不行.<br> 问了度娘后才发现, shell原则上是不支持浮点数计算的.<br>  因为着急用, 就随便找了个帖子说可以这么比:<br>  <figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  expr <span class="variable">$a</span> \&gt; <span class="variable">$b</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></p>
 <p>  我没test就直接先push到公司的repo了, reviewer估计也没用过, 看了下就merge了.<br> 今天跑脚本才发现根本就不能这么用啊, holy shit. 最后找到了bc这个神器, 问了下度娘, 都没什么好文章. 索性就直接上官网看<a href="https://www.gnu.org/software/bc/manual/html_mono/bc.html#SEC3" target="_blank" rel="external">manual</a>.<br>  好了, 废话说了一大堆, 现在来说说bc吧:)</p>

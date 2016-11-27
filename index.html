@@ -230,15 +230,109 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/11/28/rsyslog-presentation/" itemprop="url">
+                  rsyslog presentation
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-11-28T00:29:19+08:00" content="2016-11-28">
+              2016-11-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux-os/" itemprop="url" rel="index">
+                    <span itemprop="name">linux os</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/28/rsyslog-presentation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/28/rsyslog-presentation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <h2 id="rsyslog_message_flow"><a href="#rsyslog_message_flow" class="headerlink" title="rsyslog message flow"></a>rsyslog message flow</h2><p><strong>message enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an action, which then does something to the message, e.g. write it to a file or a database, or forward it to a remote host.</strong><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/28/rsyslog-presentation/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -736,115 +830,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/04/python对json的处理（转）/" itemprop="url">
-                  python对json的处理（转）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-04T20:10:15+08:00" content="2016-01-04">
-              2016-01-04
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/python-programming/" itemprop="url" rel="index">
-                    <span itemprop="name">python programming</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/04/python对json的处理（转）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/04/python对json的处理（转）/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>转载一篇非常好的介绍python对json处理的<a href="http://www.cnblogs.com/coser/archive/2011/12/14/2287739.html">blog</a></p>
-</blockquote>
-<h5 id="u4EC0_u4E48_u662Fjson_uFF1A"><a href="#u4EC0_u4E48_u662Fjson_uFF1A" class="headerlink" title="什么是json："></a>什么是json：</h5><p>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。易于人阅读和编写。同时也易于机器解析和生成。它基于JavaScript Programming Language, Standard ECMA-262 3rd Edition - December 1999的一个子集。JSON采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C, C++, C#, Java, JavaScript, Perl, Python等）。这些特性使JSON成为理想的数据交换语言。</p>
-<h5 id="JSON_u5EFA_u6784_u4E8E_u4E24_u79CD_u7ED3_u6784_uFF1A"><a href="#JSON_u5EFA_u6784_u4E8E_u4E24_u79CD_u7ED3_u6784_uFF1A" class="headerlink" title="JSON建构于两种结构："></a>JSON建构于两种结构：</h5><p>“名称/值”对的集合（A collection of name/value pairs）。不同的语言中，它被理解为对象（object），纪录（record），结构（struct），字典（dictionary），哈希表（hash table），有键列表（keyed list），或者关联数组 （associative array）。<br>值的有序列表（An ordered list of values）。在大部分语言中，它被理解为数组（array）。<br>这些都是常见的数据结构。事实上大部分现代计算机语言都以某种形式支持它们。这使得一种数据格式在同样基于这些结构的编程语言之间交换成为可能。</p>
-<p>jso官方说明参见：<a href="http://json.org/">http://json.org/</a></p>
-<p>Python操作json的标准api库参考：<a href="http://docs.python.org/library/json.html">http://docs.python.org/library/json.html</a><br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/04/python对json的处理（转）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -891,7 +876,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -905,7 +890,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

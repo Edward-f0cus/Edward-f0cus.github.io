@@ -1,0 +1,860 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="redhat," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Edward Shen's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="rsyslog message flowmessage enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rsyslog presentation">
+<meta property="og:url" content="http://yoursite.com/2016/11/28/rsyslog-presentation/index.html">
+<meta property="og:site_name" content="Edward Shen's blog">
+<meta property="og:description" content="rsyslog message flowmessage enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an">
+<meta property="og:updated_time" content="2016-11-27T16:38:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rsyslog presentation">
+<meta name="twitter:description" content="rsyslog message flowmessage enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> rsyslog presentation | Edward Shen's blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7ea58659b10b8770d502eca5f6dfee77";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Edward Shen's blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Somewhere I belong...</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu menu-left">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <form class="site-search-form">
+    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+  </form>
+
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'Xw9X8qz3gTzyzSo9dt7a','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                rsyslog presentation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-11-28T00:29:19+08:00" content="2016-11-28">
+              2016-11-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/linux-os/" itemprop="url" rel="index">
+                    <span itemprop="name">linux os</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/28/rsyslog-presentation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/28/rsyslog-presentation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="rsyslog_message_flow"><a href="#rsyslog_message_flow" class="headerlink" title="rsyslog message flow"></a>rsyslog message flow</h2><p><strong>message enter rsyslog with the help of input modules. Then, they are passed to ruleset, where rules are conditionally applied. when a rule matches, the message is transferred to an action, which then does something to the message, e.g. write it to a file or a database, or forward it to a remote host.</strong><br><a id="more"></a></p>
+<h2 id="rsyslog_overview"><a href="#rsyslog_overview" class="headerlink" title="rsyslog overview"></a>rsyslog overview</h2><ul>
+<li>all the features supported: <a href="http://www.rsyslog.com/doc/master/features.html" target="_blank" rel="external">http://www.rsyslog.com/doc/master/features.html</a></li>
+<li>rsyslog defaults to using <strong>TCP</strong> on port 514, while syslog uses udp and 514.</li>
+<li><code>/var/log</code> persistently store the process and kenel log</li>
+<li><code>system-journald</code> collects:<ul>
+<li>messages from kernel</li>
+<li>early stage of the boot process</li>
+<li>standard output and error of daemons</li>
+<li>syslog</li>
+</ul>
+</li>
+<li><code>rsyslog</code> service:<ul>
+<li>sorts syslog messages by type and priority. </li>
+<li>write them to <code>/var/log</code></li>
+<li>most syslogs are stored in <code>/var/log/messages</code></li>
+<li><code>cat /etc/rsyslog.conf</code> can show all the facilities.</li>
+<li>config files locates in <code>/etc/rsyslog.conf</code> and <code>/etc/rsyslog.d/*.conf</code></li>
+</ul>
+</li>
+<li><code>logrotate</code> is to rotate <code>/var/log/messages</code> to <code>/var/log/messages-20160920</code><ul>
+<li>after 4 weeks, old log file is discarded to free disk space.</li>
+<li>cron jobs are run daily to check if there’s log to discard</li>
+<li>most log files are rotated weekly</li>
+</ul>
+</li>
+<li><code>logger</code>: <strong>useful to test changes to <code>rsyslog</code> configuration.</strong><ul>
+<li><code>logger -p local7.notice &quot;Log entry created on serverX&quot;</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="how_to_config_in_/etc/rsyslog-conf"><a href="#how_to_config_in_/etc/rsyslog-conf" class="headerlink" title="how to config in /etc/rsyslog.conf"></a>how to config in <code>/etc/rsyslog.conf</code></h2><h3 id="Filters"><a href="#Filters" class="headerlink" title="Filters"></a>Filters</h3><h4 id="facility/priority-based_filters"><a href="#facility/priority-based_filters" class="headerlink" title="facility/priority-based filters"></a>facility/priority-based filters</h4><p><code>FACILITY.PRIORITY</code><br><strong>FACILITY</strong>: kern (0), user (1), mail (2), daemon (3), auth (4), syslog (5), lpr (6), news (7), uucp (8), cron (9), authpriv (10), ftp (11), and local0 through local7 (16 - 23).<br><strong>PRIORITY</strong>: debug (7), info (6), notice (5), warning (4), err (3), crit (2), alert (1), and emerg (0).<br><strong>EXAMPLE</strong>:</p>
+<ul>
+<li><code>kern.*</code></li>
+<li><code>mail.crit</code></li>
+<li><code>cron.!info,!debug</code><h4 id="property-based_filters"><a href="#property-based_filters" class="headerlink" title="property-based filters"></a>property-based filters</h4><strong>syntax</strong>:<code>:PROPERTY, [!]COMPARE_OPERATION, &quot;STRING&quot;</code><br><code>PROPERTIES</code>: fetch from <code>man rsyslog.conf</code>, under <em>Available properties</em>.<br><code>COMPARE_OPERATION</code>: <em>contains, isequal, startswith, regex, ereregex, isempty</em><br><strong>EXAMPLE</strong>:</li>
+<li><code>:msg, contains, &quot;error&quot;</code></li>
+<li><code>:hostname, isequal, &quot;host1&quot;</code></li>
+<li><code>:msg, !regex, &quot;fatal .* error&quot;</code><h4 id="expression-based_filters"><a href="#expression-based_filters" class="headerlink" title="expression-based filters"></a>expression-based filters</h4><strong>syntax</strong>: <code>if EXPRESSION then ACTION else ACTION</code><br><strong>EXAMPLE</strong>:<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="variable">$programname</span> == <span class="string">'prog1'</span> <span class="keyword">then</span> &#123;</span><br><span class="line">	   action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1.log"</span>)</span><br><span class="line">   if <span class="variable">$msg</span> contains <span class="string">'test'</span> then</span><br><span class="line">	   action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1test.log"</span>)</span><br><span class="line">   else</span><br><span class="line">     action(type=<span class="string">"omfile"</span> file=<span class="string">"/var/log/prog1notest.log"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="RainerScript"><a href="#RainerScript" class="headerlink" title="RainerScript"></a>RainerScript</h4><p><strong>complex filter, use rsyslog’s own script language, called rainerscript</strong><br>HOW TO USE rainerscript(official doc):<br><a href="http://www.rsyslog.com/doc/rainerscript.html" target="_blank" rel="external">http://www.rsyslog.com/doc/rainerscript.html</a><br><strong>can use <code>set</code> and <code>unset</code> to define and delete user defined variable.</strong> </p>
+<h4 id="ACTION"><a href="#ACTION" class="headerlink" title="ACTION"></a>ACTION</h4><h5 id="saving_syslog_messages_to_log_files"><a href="#saving_syslog_messages_to_log_files" class="headerlink" title="saving syslog messages to log files"></a>saving syslog messages to log files</h5><p><code>FILTER PATH</code><br>examples: <code>cron.* /var/log/cron.log</code><br><code>FILTER -PATH</code><br>by default, rsyslog sync logs everytime after a syslog message is generated. use <code>-</code> to omit syncing.<br>can improve performance when programs run very verbose log messages.<br><code>FILTER ?DynamicFile</code><br><em>DynamicFile</em>: a name of defined template that modify output paths, can use <code>-</code> to disable syncing.<br>if it’s set as <code>/dev/console</code>, syslog messages can be printed on standard output.</p>
+<h5 id="sending_syslog_messages_over_network"><a href="#sending_syslog_messages_over_network" class="headerlink" title="sending syslog messages over network"></a>sending syslog messages over network</h5><p><code>@[(zNUMBER)]HOST:[PORT]</code><br><code>@</code>: use UDP protocol<br><code>@@</code>: use TCP protocol<br><code>zNUMBER</code>: <code>z</code> means using zlib to compress the syslog messages. <code>NUMBER</code> means the compress level(1-9). below 90 bytes are never compressed<br><strong>EXAMPLE</strong>:<br><code>*.* @192.168.0.1</code><br><code>*.* @(z9)example.com:6514</code></p>
+<h5 id="can_also_send_syslog_messages_to_specific_user"><a href="#can_also_send_syslog_messages_to_specific_user" class="headerlink" title="can also send syslog messages to specific user"></a>can also send syslog messages to specific user</h5><h5 id="executing_a_program"><a href="#executing_a_program" class="headerlink" title="executing a program"></a>executing a program</h5><p><code>FILTER ^EXECUTABLE; TEMPLATE</code><br>syslog message filtered by FILTER, formatted withTEMPLATE, are passed as a parameter to EXECUTABLE program. Then it’s executed.</p>
+<h5 id="storing_syslog_messages_in_a_database"><a href="#storing_syslog_messages_in_a_database" class="headerlink" title="storing syslog messages in a database"></a>storing syslog messages in a database</h5><p><code>:PLUGIN:DB_HOST,DB_NAME,DB_USER,DB_PASSWORD;[TEMPLATE]</code><br>currently, rsyslog only supports mysql and postgresql. have to install <em>rsyslog-mysql</em> and <em>rsyslog-pgsql</em> packages. config in <code>/etc/rsyslog.conf</code> to load the module:<br><code>$ModLoad ommysql    # Output module for MySQL support
+$ModLoad ompgsql    # Output module for PostgreSQL support</code></p>
+<h5 id="discard_syslog_messages"><a href="#discard_syslog_messages" class="headerlink" title="discard syslog messages"></a>discard syslog messages</h5><p><code>FILTER ~</code></p>
+<h4 id="specifying_multiple_actions"><a href="#specifying_multiple_actions" class="headerlink" title="specifying multiple actions"></a>specifying multiple actions</h4><p><code>FILTER ACTION
+&amp; ACTION
+&amp; ACTION</code><br><strong>EXAMPLE</strong>:<br><code>kern.=crit user1
+&amp; ^test-program; temp
+&amp; @192.168.0.1</code></p>
+<h4 id="TEMPLATES"><a href="#TEMPLATES" class="headerlink" title="TEMPLATES"></a>TEMPLATES</h4><p><strong>templates definition should always precede rule definition in <code>/etc/rsyslog.conf</code>, or it’ll be ignored.</strong><br>Any output that is generated by rsyslog can be formatted with the use of template.<br><code>template TEMPLATE_NAME,&quot;text %PROPERTY% more text&quot;, [OPTION]</code><br><em>OPTION</em>: currently only <code>sql</code> and <code>stdsql</code> are supported.<br>also provide some predefined templates.<br><strong>EXAMPLE</strong>:<br><code>$template verbose, &quot;%syslogseverity%, %syslogfacility%, %timegenerated%, %HOSTNAME%, %syslogtag%, %msg%\n&quot;</code><br><code>$template dbFormat,&quot;insert into SystemEvents (Message, Facility, FromHost, Priority, DeviceReportedTime, ReceivedAt, InfoUnitID, SysLogTag) values (&#39;%msg%&#39;, %syslogfacility%, &#39;%HOSTNAME%&#39;, %syslogpriority%, &#39;%timereported:::date-mysql%&#39;, &#39;%timegenerated:::date-mysql%&#39;, %iut%, &#39;%syslogtag%&#39;)&quot;, sql</code><br>option <em>sql</em> tells the database writer to format the message as an mysql sql query.</p>
+<p>#####generate dynamic file names:<br><code>$template DynamicFile,&quot;/var/log/test_logs/%timegenerated%-test.log&quot;</code><br><code>*.* ?DynamicFile</code><br><code>?</code> is an action definition to mark the template</p>
+<p>#####PROPERTIES in template follows syntax:<br><code>%PROPERTY_NAME[:FROM_CHAR:TO_CHAR:OPTION]%</code><br>re can be used here too, to set “R” as the “FROM_CHAR”, and set re as the “TO_CHAR”.<br>property options can refer to <code>man rsyslog.conf</code> under property options part.<br><code>%timegenerated:1:10:date-rfc3339%</code>: format the first 10 characters of time stamp as RFC 3999.</p>
+<h5 id="log_rotation_3A_container_does_not_support_yet"><a href="#log_rotation_3A_container_does_not_support_yet" class="headerlink" title="log rotation: container does not support yet"></a>log rotation: container does not support yet</h5><h2 id="rsyslog_image__287-4-7_29"><a href="#rsyslog_image__287-4-7_29" class="headerlink" title="rsyslog image (7.4.7)"></a>rsyslog image (7.4.7)</h2><h4 id="basic_feature_3A"><a href="#basic_feature_3A" class="headerlink" title="basic feature:"></a>basic feature:</h4><ul>
+<li><p>installs from atomic command</p>
+<ul>
+<li><p><code>atomic install rhel7/rsyslog</code></p>
+<ul>
+<li>execute <code>/bin/install.sh</code> in image to make some directory and mount some dirs<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span> --<span class="keyword">rm</span> --privileged -v /:/host -<span class="keyword">e</span> HOST=/host -<span class="keyword">e</span> IMAGE=rhel7/rsyslog -<span class="keyword">e</span> NAME=rsyslog rhel7/rsyslog /bin/install.<span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>atomic run rhel7/rsyslog</code></p>
+<ul>
+<li>mount some dirs installed in the previous step, and then run the <code>/bin/rsyslog.sh</code> to start rsyslog service<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --privileged --name rsyslog --net=host -v <span class="regexp">/etc/</span>pki<span class="regexp">/rsyslog:/</span>etc<span class="regexp">/pki/</span>rsyslog -v <span class="regexp">/etc/</span>rsyslog.<span class="string">conf:</span><span class="regexp">/etc/</span>rsyslog.conf -v <span class="regexp">/etc/</span>rsyslog.<span class="string">d:</span><span class="regexp">/etc/</span>rsyslog.d -v <span class="regexp">/var/</span><span class="string">log:</span><span class="regexp">/var/</span>log -v <span class="regexp">/var/</span>lib<span class="regexp">/rsyslog:/</span>var<span class="regexp">/lib/</span>rsyslog -v <span class="regexp">/run/</span><span class="string">log:</span><span class="regexp">/run/</span>log -v <span class="regexp">/etc/</span>machine-<span class="string">id:</span><span class="regexp">/etc/</span>machine-id -v <span class="regexp">/etc/</span><span class="string">localtime:</span><span class="regexp">/etc/</span>localtime -e IMAGE=rhel7<span class="regexp">/rsyslog -e NAME=rsyslog --restart=always rhel7/</span>rsyslog <span class="regexp">/bin/</span>rsyslog.sh</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>configure from host: no need to go inside the container</p>
+</li>
+<li>restarting the service after changing configuration:<ul>
+<li><code>docker stop rsyslog</code></li>
+<li><code>docker rm rsyslog</code></li>
+<li><code>atomic run rhel7/rsyslog</code></li>
+</ul>
+</li>
+<li>super privileged container: container has root access to host</li>
+</ul>
+<h4 id="test_simply_3A"><a href="#test_simply_3A" class="headerlink" title="test simply:"></a>test simply:</h4><ul>
+<li><code>docker ps</code> to check whether it’s running or not</li>
+<li><code>tail -f /var/log/messages</code> to monitor the syslogs</li>
+<li>use <code>logger &quot;test info&quot;</code>, then to see the syslogs.</li>
+</ul>
+<h4 id="disable_journald_persistent_logging_3A"><a href="#disable_journald_persistent_logging_3A" class="headerlink" title="disable journald persistent logging:"></a>disable journald persistent logging:</h4><ul>
+<li>why?: if rsyslog is working, no need to use journald logs any more.</li>
+<li>how?: modify <code>/etc/systemd/journald.conf</code>, change <code>Storage=volatile</code>.</li>
+<li>what happened?: journald still works, but store logs to ramdisk. rsyslog can still capture and process the journald logs.</li>
+</ul>
+<h4 id="rsyslog_container_does_not_support_logrotate_yet"><a href="#rsyslog_container_does_not_support_logrotate_yet" class="headerlink" title="rsyslog container does not support logrotate yet"></a><strong>rsyslog container does not support logrotate yet</strong></h4><h4 id="how_to_update_3A"><a href="#how_to_update_3A" class="headerlink" title="how to update:"></a>how to update:</h4><ul>
+<li><code>docker pull rhel7/rsyslog</code></li>
+<li>if there’s a new image downloaded, run below<ul>
+<li><code>docker stop rhel7/rsyslog</code></li>
+<li><code>docker rm rhel7/rsyslog</code></li>
+<li><code>atomic install rhel7/rsyslog</code></li>
+<li><code>atomic run rhel7/rsyslog</code></li>
+</ul>
+</li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/redhat/" rel="tag">#redhat</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/27/90-days-compass-goal/" rel="next" title="90 days compass goal">
+                <i class="fa fa-chevron-left"></i> 90 days compass goal
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/28/rsyslog-presentation/"
+           data-title="rsyslog presentation" data-url="http://yoursite.com/2016/11/28/rsyslog-presentation/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/uploads/Edward.jpg" alt="Edward Shen" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Edward Shen</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">Somewhere I belong...</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/edward-f0cus" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> github
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/2164170472" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rsyslog_message_flow"><span class="nav-number">1.</span> <span class="nav-text">rsyslog message flow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsyslog_overview"><span class="nav-number">2.</span> <span class="nav-text">rsyslog overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how_to_config_in_/etc/rsyslog-conf"><span class="nav-number">3.</span> <span class="nav-text">how to config in /etc/rsyslog.conf</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filters"><span class="nav-number">3.1.</span> <span class="nav-text">Filters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#facility/priority-based_filters"><span class="nav-number">3.1.1.</span> <span class="nav-text">facility/priority-based filters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#property-based_filters"><span class="nav-number">3.1.2.</span> <span class="nav-text">property-based filters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#expression-based_filters"><span class="nav-number">3.1.3.</span> <span class="nav-text">expression-based filters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RainerScript"><span class="nav-number">3.1.4.</span> <span class="nav-text">RainerScript</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ACTION"><span class="nav-number">3.1.5.</span> <span class="nav-text">ACTION</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#saving_syslog_messages_to_log_files"><span class="nav-number">3.1.5.1.</span> <span class="nav-text">saving syslog messages to log files</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sending_syslog_messages_over_network"><span class="nav-number">3.1.5.2.</span> <span class="nav-text">sending syslog messages over network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#can_also_send_syslog_messages_to_specific_user"><span class="nav-number">3.1.5.3.</span> <span class="nav-text">can also send syslog messages to specific user</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#executing_a_program"><span class="nav-number">3.1.5.4.</span> <span class="nav-text">executing a program</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#storing_syslog_messages_in_a_database"><span class="nav-number">3.1.5.5.</span> <span class="nav-text">storing syslog messages in a database</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#discard_syslog_messages"><span class="nav-number">3.1.5.6.</span> <span class="nav-text">discard syslog messages</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#specifying_multiple_actions"><span class="nav-number">3.1.6.</span> <span class="nav-text">specifying multiple actions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TEMPLATES"><span class="nav-number">3.1.7.</span> <span class="nav-text">TEMPLATES</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#log_rotation_3A_container_does_not_support_yet"><span class="nav-number">3.1.7.1.</span> <span class="nav-text">log rotation: container does not support yet</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rsyslog_image__287-4-7_29"><span class="nav-number">4.</span> <span class="nav-text">rsyslog image (7.4.7)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#basic_feature_3A"><span class="nav-number">4.0.1.</span> <span class="nav-text">basic feature:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#test_simply_3A"><span class="nav-number">4.0.2.</span> <span class="nav-text">test simply:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#disable_journald_persistent_logging_3A"><span class="nav-number">4.0.3.</span> <span class="nav-text">disable journald persistent logging:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rsyslog_container_does_not_support_logrotate_yet"><span class="nav-number">4.0.4.</span> <span class="nav-text">rsyslog container does not support logrotate yet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#how_to_update_3A"><span class="nav-number">4.0.5.</span> <span class="nav-text">how to update:</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Edward Shen</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"edwardf0cus"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
